@@ -5,6 +5,7 @@ import objects from '../../../tasks.json';
 import SerchBar from "../SerchBar/SerchBar"
 import ImageGallery from "../ImageGallery/ImageGallery"
 import ArticleList from "../ArticleList/ArticleList"
+import { fetchArticlesWithTopic } from "../../articles-api";
 //import ErrorMessage from "../ErrorMessage/ErrorMessage"
 //import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
 // import ImageModal from "../ImageModal/"
@@ -12,7 +13,9 @@ import ArticleList from "../ArticleList/ArticleList"
 // замінити objects на компонент з посиланням з бібліотеки!!!
 export default function App() {
   const [filter, setFilter] = useState('');
+  const [loading, setLoading] = useState(false);
   const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(false);
 
   const [tasks, setTasks] = useState(() => {
     const savClicks = window.localStorage.getItem("my-clicks");
@@ -33,11 +36,16 @@ export default function App() {
 
   useEffect(() => {
     async function fetchArticles() {
-      const response = await axios.get(
-        "https://hn.algolia.com/api/v1/search?query=react"
-      );
-      // 2. Записуємо дані в стан
-      setArticles(response.data.hits);
+      try {
+        setLoading(true);
+        // 2. Використовуємо HTTP-функцію
+        const data = await fetchArticlesWithTopic("react");
+        setArticles(data);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchArticles();
@@ -58,12 +66,16 @@ export default function App() {
 
   return (
     <div className={css.container}>
-      <h4>Latest articles</h4>
       <div>
-        <h1>Latest articles</h1>
+        <h4>Latest articles</h4>
+        {loading && <p>Loading data, please wait...</p>}
+        {error && (
+          <p>Whoops, something went wrong! Please try reloading this page!</p>
+        )}
         {articles.length > 0 && <ArticleList items={articles} />}
       </div>
       <>
+
         {/* <Loader /> */}
         {/* <LoadMoreBtn /> */}
         {/* <ImageModal /> */}
