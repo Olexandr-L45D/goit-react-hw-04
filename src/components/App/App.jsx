@@ -51,16 +51,16 @@ export default function App() {
     fetchArticles();
   }, []);
 
-  const addTask = (newTask) => {
-    setTasks((prevTasks) => {
-      return [...prevTasks, newTask];
-    });
-  };
-  const deleteTask = (taskId) => {
-    setTasks((prevTasks) => {
-      return prevTasks.filter((task) => task.id !== taskId);
-    });
-  };
+  // const addTask = (newTask) => {
+  //   setTasks((prevTasks) => {
+  //     return [...prevTasks, newTask];
+  //   });
+  // };
+  // const deleteTask = (taskId) => {
+  //   setTasks((prevTasks) => {
+  //     return prevTasks.filter((task) => task.id !== taskId);
+  //   });
+  // };
   const visibleTasks = tasks.filter((task) =>
     task.name.toLowerCase().includes(filter.toLowerCase()));
 
