@@ -1,12 +1,12 @@
 import css from "./ImageCard.module.css"
 import axios from "axios";
 
-export default function ImageCard({ obj: { id, name, lak, favorit } }) {
+export default function ImageCard({ obj: { id, uzername, lak, favorit } }) {
     return (
 
-        <div className={css.item}>
+        <div className={css.card}>
             <img src="" alt="" />
-            <p>{name}</p>
+            <p>{uzername}</p>
             <p>{lak}</p>
             <p>{favorit}</p>
         </div>

@@ -1,10 +1,10 @@
 import axios from "axios";
 import css from './App.module.css'
 import React, { useState, useEffect } from "react";
-import objects from '../../../tasks.json';
 import SerchBar from "../SerchBar/SerchBar"
 import ImageGallery from "../ImageGallery/ImageGallery"
-import { fetchArticlesWithTopic } from "../../articles-api";
+// import { fetchArticlesWithTopic } from "../../articles-api"; 
+import { getAsyncImage } from "../../articles-api";
 //import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
 // import ImageModal from "../ImageModal/"
@@ -18,7 +18,7 @@ export default function App() {
 
   const [tasks, setTasks] = useState(() => {
     const savClicks = window.localStorage.getItem("my-clicks");
-    return savClicks !== null ? JSON.parse(savClicks) : objects
+    return savClicks !== null ? JSON.parse(savClicks) : [];
   });
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function App() {
       try {
         setLoading(true);
         // 2. Використовуємо HTTP-функцію
-        const data = await fetchArticlesWithTopic("react");
+        const data = await getAsyncImage("react");
         setArticles(data);
       } catch (error) {
         setError(true);
@@ -102,4 +102,4 @@ export default function App() {
 //   task.name.toLowerCase().includes(filter.toLowerCase()));
 //  <ImageGallery tasks={visibleTasks} objects={objects} onDelete={deleteTask} />
 
-
+// gpxaaiPUteVQc-DhqqF3GLxbICUzWFNHSgvAwIWoWbg

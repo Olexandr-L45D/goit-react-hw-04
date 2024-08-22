@@ -1,18 +1,74 @@
 import axios from "axios";
+
+
+const ENDPOINT = "https://pixabay.com/api/";
+const API_KEY = "44760113-b733d2f51a4c6409aa3483a05";
+
+
+const params = {
+    key: API_KEY,
+    q: "",
+    image_type: 'photo',
+    orientation: "horizontal",
+    safesearch: true,
+    page: 1,
+    per_page: 15
+};
+
+export { params };
+
+async function getAsyncImage(searchText) {
+    params.q = searchText;
+    const neWurls = new URLSearchParams(params);
+    const response = await axios.get(`${ENDPOINT}?${neWurls}`)
+
+    return response.data;
+};
+
+export { getAsyncImage };
+
 // import toast, { Toaster } from 'react-hot-toast';
 // const notify = () => toast('Here is your toast.');
+// Authorization: Client - ID gpxaaiPUteVQc - DhqqF3GLxbICUzWFNHSgvAwIWoWbg
 
-axios.defaults.baseURL = "https://hn.algolia.com/api/v1";
+//мій ключ з галереї :const API_KEY = "gpxaaiPUteVQc-DhqqF3GLxbICUzWFNHSgvAwIWoWbg"
+//const YOUR_ACCESS_KEY = "gpxaaiPUteVQc-DhqqF3GLxbICUzWFNHSgvAwIWoWbg";
+//axios.defaults.baseURL = "https://api.unsplash.com/photos/?client_id=YOUR_ACCESS_KEY";
+// GET https://unsplash.com/oauth/authorize?client_id=PARENT_APPLICATION_CLIENT_ID&redirect_uri=https://mywordpressinstall.com/unsplash_callback&response_type=code&scope=public
 
-export const fetchArticlesWithTopic = async topic => {
-    const response = await axios.get(`/search?query=${topic}`);
-    return response.data.hits;
-};
+// export const fetchArticlesWithTopic = async topic => {
+//     const response = await axios.get(`/search?query=${topic}`);
+//     return response.data.hits;
+// };
+
+// const doStuff = async () => {
+//     try {
+//         const users = await fetchArticlesWithTopic();
+//         console.log(users);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
+
+// doStuff();
+
+
+
+// const ENDPOINT = "https://pixabay.com/api/";
+// const API_KEY = "44760113-b733d2f51a4c6409aa3483a05";
+
+
+// const params = {
+//     "access_token": "091343ce13c8ae780065ecb3b13dc903475dd22cb78a05503c2e0c69c5e98044",
+//     "token_type": "bearer",
+//     "scope": "public",
+//     "created_at": "1588259748"
+// }
 
 // axios.get("https://jsonplaceholder.typicode.com/users", {
 //     params: {
 //         _limit: 7,
-//         _sort: "name"
+//         _sort: "username"
 //     }
 // });
 // Controls the group number
@@ -61,3 +117,14 @@ const totalPages = Math.ceil(100 / limit);
 // };
 
 // doStuff();
+
+// {
+//     "urls": {
+//         "raw": "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9",
+//             "full": "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9&fm=jpg&q=80",
+//                 "regular": "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9&fm=jpg&fit=crop&w=1080&q=80&fit=max",
+//                     "small": "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9&&fm=jpg&w=400&fit=max",
+//                         "thumb": "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?ixid=2yJhcHBfaWQiOjEyMDd9&fm=jpg&w=200&fit=max"
+//     },
+//     // ... other photo fields
+// }
