@@ -1,6 +1,11 @@
+.container {
+    width: 100%;
+    background-color: blueviolet;
+}
+
 .list {
     margin: 0;
-    padding: 0;
+    padding: 2;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -14,7 +19,7 @@
 
 @media screen and (min-width: 768px) {
     .list {
-        padding: 0px;
+        padding: 3px;
         margin: 0px;
         list-style: none;
         display: flex;
@@ -25,17 +30,19 @@
 
     .item {
         width: 250px;
+        padding: 3px;
+        margin: 2px;
         list-style: none;
         width: calc((100% - 16px) / 3);
     }
 }
 
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1440px) {
 
     .item {
         width: 250px;
         list-style: none;
-        width: calc((100% - 16px) / 3);
+        width: calc((100% - 16px) / 4);
     }
 }
 

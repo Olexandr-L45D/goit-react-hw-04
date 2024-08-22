@@ -1,16 +1,20 @@
 import css from './ImageGallery.module.css';
-import ImageCard from "../ImageCard/ImageCard"
+//import ImageCard from "../ImageCard/ImageCard"
 
-export default function ImageGallery({ tasks, onDelete }) {
+export default function ImageGallery({ items }) {
     return (
-        <ul className={css.list}>
-            {tasks.map((task) => (
-                <li className={css.item} key={task.id} >
-                    <ImageCard obj={task} onDelete={onDelete} />
-                </li>
-            ))}
-        </ul>
+        <div className={css.item}>
+            <ul>
+                {items.map(({ objectID, url, title }) => (
+                    <li key={objectID}>
+                        <a href={url} target="_blank" rel="noreferrer noopener">
+                            {title}
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
-}
 
+};
 

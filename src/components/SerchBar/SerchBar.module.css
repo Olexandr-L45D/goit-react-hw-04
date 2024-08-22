@@ -1,5 +1,10 @@
+.container {
+    width: 100%;
+    background-color: blue;
+}
+
 .item {
-    width: 250px;
+    width: 400px;
     height: auto;
     margin: 5px;
     padding: 5px;
