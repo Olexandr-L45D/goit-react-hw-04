@@ -1,6 +1,6 @@
 
 import css from "./SerchBar.module.css"
-
+//import { CiSearch } from "react-icons/ci";
 
 export default function SerchBar({ onSearch }) {
 
@@ -20,18 +20,24 @@ export default function SerchBar({ onSearch }) {
     };
 
     return (
-        <div className={css.container}>
-            <div className={css.item}>
+        <header className={css.header}>
+            <div className={css.items}>
+
                 <form onSubmit={handleSubmit}>
-                    <input type="text" name="topic" placeholder="Search images and photos..." />
-                    <button>Search</button>
+
+                    <input className={css.inputText} type="text"
+                        placeholder="Search images and photos..." name="topic" />
+                    <button className={css.btnBtn} type="submit">Search</button>
+
                 </form>
+
             </div>
-        </div >
+        </header >
     );
 };
 
-
+// {/* <button className={css.btn}><CiSearch /></button> */}
+// export default function SerchBar({ value, onSearch })
 // export default function SerchBar({ value, onFilter }) {
 //     return (
 //         <div className={css.item}>
@@ -44,6 +50,19 @@ export default function SerchBar({ onSearch }) {
 //         </div>
 //     );
 // }
+
+// finally {
+//     enable(refs.loadMoreBtn, refs.spinnerText);
+//     if (params.page === maxStoriges) {
+
+//         iziToast.error({
+//             title: 'Error',
+//             message: "We're sorry, but you've reached the end of search results.",
+//         });
+//         refs.loadMoreBtn.removeEventListener("click", handleLoadMore);
+//         hiden(refs.loadMoreBtn); hiden(refs.spinnerText);
+//     }
+// }}, 500);} // затримка сеттаймаутом setTimeout на 0,5 секунди
 
 
 

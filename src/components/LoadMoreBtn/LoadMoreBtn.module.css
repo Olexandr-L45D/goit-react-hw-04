@@ -1,1 +1,13 @@
 /* style */
+.styleBtn {
+    width: 150px;
+}
+
+.btn {
+    width: 120px;
+    padding: 1px;
+    margin: 1px;
+    background-color: aqua;
+    border: 1px solid black;
+    border-color: black;
+}

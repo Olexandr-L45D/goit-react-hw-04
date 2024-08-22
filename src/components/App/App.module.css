@@ -45,10 +45,14 @@
 }
 
 .container {
-  width: 100%;
-  margin: 10px auto;
+  width: 320px;
+  margin: 1px auto;
   background-color: #ffffff;
   overflow: hidden;
+}
+
+.headers {
+  width: 100%;
 }
 
 .item {
@@ -91,8 +95,14 @@
   }
 }
 
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+  }
+}
+
 @media screen and (min-width: 1440px) {
   .container {
-    width: 1440px;
+    width: 100%;
   }
 }

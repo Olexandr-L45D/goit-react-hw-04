@@ -1,23 +1,55 @@
-.container {
+.header {
     width: 100%;
     background-color: blue;
+    text-align: center;
+    align-items: center;
 }
 
-.item {
-    width: 400px;
+.items {
+    width: 100%;
     height: auto;
     margin: 5px;
     padding: 5px;
     padding-top: 5px;
     padding-bottom: 5px;
     list-style: none;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    align-items: left;
+    text-align: center;
+    align-items: center;
 }
 
 .paragraf {
     padding-bottom: 0px;
     margin: 0px;
+}
+
+.inputText {
+    width: 230px;
+    height: auto;
+    margin: 2px;
+    padding: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid rgb(252, 248, 248);
+    border-color: rgb(252, 250, 250);
+    border-radius: 4px;
+}
+
+/* .btn {
+    width: 40px;
+    padding: 1px;
+    margin: 1px;
+    background-color: aqua;
+    border: 1px solid black;
+    border-color: black;
+} */
+
+.btnBtn {
+    width: 70px;
+    height: auto;
+    padding: 5px;
+    margin: 1px;
+    background-color: rgb(157, 255, 0);
+    border: 1px solid rgb(252, 248, 248);
+    border-color: rgb(252, 250, 250);
+    border-radius: 8px;
 }

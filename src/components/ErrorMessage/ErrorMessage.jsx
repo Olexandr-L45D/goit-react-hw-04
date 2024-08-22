@@ -3,7 +3,7 @@ import css from "./ErrorMessage.module.css"
 import { Formik, Form, Field } from 'formik';
 import { useId } from "react";
 import * as Yup from "yup";
-import { ErrorMessage } from "formik";
+import { ErrorMessage } from "formik"
 
 export default function ErrorMessage({ onAdd }) {
     const nameFieldId = useId();
