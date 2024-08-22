@@ -1,5 +1,5 @@
 .item {
-    width: 200px;
+    /* width: 180px; */
     padding: 1px;
     margin: 1px;
     height: auto;
@@ -10,7 +10,7 @@
     color: rgb(14, 15, 15);
     border: 1px solid black;
     border-color: black;
-    border-radius: 10px;
+    border-radius: 1px;
 }
 
 .itemText {

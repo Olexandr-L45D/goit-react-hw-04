@@ -1,5 +1,7 @@
 
 import css from "./SerchBar.module.css"
+import toast, { Toaster } from 'react-hot-toast';
+const notify = () => toast('Here is your toast.');
 //import { CiSearch } from "react-icons/ci";
 
 export default function SerchBar({ onSearch }) {
@@ -8,29 +10,24 @@ export default function SerchBar({ onSearch }) {
         evt.preventDefault();
         const form = evt.target;
         const topic = form.elements.topic.value;
-
         // Якщо текстове поле порожнє, виводимо повідомлення  і припиняємо виконання функції.
         if (form.elements.topic.value.trim() === "") {
-            alert("Please enter search term!")
+            // Toaster("Please enter search term!")
             return;
         }
         // У протилежному випадку викликаємо пропс  і передаємо йому значення поля
         onSearch(topic);
         form.reset();
     };
-
     return (
         <header className={css.header}>
             <div className={css.items}>
-
                 <form onSubmit={handleSubmit}>
-
                     <input className={css.inputText} type="text"
                         placeholder="Search images and photos..." name="topic" />
-                    <button className={css.btnBtn} type="submit">Search</button>
-
+                    <button onClick={notify} className={css.btnBtn} type="submit">Search</button>
+                    <Toaster />
                 </form>
-
             </div>
         </header >
     );

@@ -1,6 +1,7 @@
 import axios from "axios";
-import izitoast from 'https://cdn.jsdelivr.net/npm/izitoast@1/+esm';
-//axios.defaults.baseURL = "https://www.pexels.com/uk-ua/search/%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%BE%D0%B1%D1%96%D0%BB%D1%96/";
+// import toast, { Toaster } from 'react-hot-toast';
+// const notify = () => toast('Here is your toast.');
+
 axios.defaults.baseURL = "https://hn.algolia.com/api/v1";
 
 export const fetchArticlesWithTopic = async topic => {

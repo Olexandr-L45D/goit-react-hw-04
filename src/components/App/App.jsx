@@ -62,7 +62,7 @@ export default function App() {
         <SerchBar onSearch={handleSearch} />
       </div>
 
-      <div className={css.container}>
+      <div >
 
         <div>
 

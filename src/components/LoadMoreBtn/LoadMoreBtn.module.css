@@ -1,6 +1,15 @@
-/* style */
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+}
+
 .styleBtn {
-    width: 150px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
 }
 
 .btn {
