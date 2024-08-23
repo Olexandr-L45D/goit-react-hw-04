@@ -2,25 +2,31 @@ import css from './ImageGallery.module.css';
 import ImageCard from "../ImageCard/ImageCard"
 
 export default function ImageGallery({ items }) {
+    
     return (
         <main>
             <div >
                 <ul className={css.list}>
                     {items.map((task) => (
                         <li className={css.item} key={task.id} >
-                            <ImageCard obj={task} />
-                            <a href={task.url} target="_blank" rel="noreferrer noopener">
-                               
-                            </a>
+                            <ImageCard obj={task} ><a href={task.url} target="_blank" rel="noreferrer noopener"> </a></ImageCard>
                         </li>
-                    ))}
+                    ))  
+                    }
+                    
                 </ul>
             </div>
         </main >
     );
 }
 
-
+// {
+//     tasks.map((task) => (
+//         <li className={css.item} key={task.id} >
+//             <Contact obj={task} onDelete={onDelete} />
+//         </li>
+//     ))
+// }
 
 // export default function ImageGallery({ items }) {
 //     return (

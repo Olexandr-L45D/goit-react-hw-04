@@ -1,48 +1,18 @@
-import { nanoid } from 'nanoid'
+
 import css from "./ErrorMessage.module.css"
-import { Formik, Form, Field } from 'formik';
-import { useId } from "react";
-import * as Yup from "yup";
-import { ErrorMessage } from "formik"
+// import { ErrorMessage } from "formik"
+import toast, { Toaster } from 'react-hot-toast';
+const notify = () => toast('enter a name.');
+const notifyli = () => toast('Whoops, something went wrong! Please try reloading this page!');
+const notifyci = () => toast('Were sorry, but you ve reached the end of search results.');
 
-export default function ErrorMessage({ onAdd }) {
-    const nameFieldId = useId();
-    const numberFieldId = useId();
-    const idId = nanoid();
+export default function ErrorMessage() {
 
-    const FeedbackSchema = Yup.object().shape({
-        name: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required("Required"),
-        number: Yup.string().min(4, "Too Short!").max(50, "Too Long!").required('Required')
-    });
-
-    const handleSubmit = (values, actions) => {
-        values.id = idId;
-        onAdd(values);
-        console.log(values);
-        actions.resetForm();
-    };
     return (
         <div className={css.item}>
-            <Formik initialValues={{
-                name: " ",
-                number: " "
-            }} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
-                <Form>
-                    <div className={css.items}>
-                        <label className={css.label} htmlFor={nameFieldId} >Name</label>
-                        <Field className={css.inp} type="text" name="name" id={nameFieldId} />
-                        <ErrorMessage className={css.messag} name="name" component="span" />
-                    </div>
-                    <div className={css.items}>
-                        <label className={css.label} htmlFor={numberFieldId} >Number</label>
-                        <Field className={css.inp} type="text" name="number" id={numberFieldId} />
-                        <ErrorMessage className={css.messag} name="number" component="span" />
-                    </div>
-                    <div className={css.btn}>
-                        <button className={css.addContact} type="submit">Add contact</button>
-                    </div>
-                </Form>
-            </Formik>
+            <div>notify()</div>
+            <div>notifyli()</div>
+            <div>notifyci()</div>
         </div>
     );
 };

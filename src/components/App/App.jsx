@@ -1,24 +1,30 @@
+
+// import ReactDOM from 'react-dom';
+// import Modal from 'react-dom';
 import axios from "axios";
 import css from './App.module.css'
 import React, { useState, useEffect } from "react";
+// import toast, { Toaster } from 'react-hot-toast';
+// const notify = () => toast('enter a name.');
+// const notifyli = () => toast('Whoops, something went wrong! Please try reloading this page!');
+// const notifyci = () => toast('Were sorry, but you ve reached the end of search results.');
 import SerchBar from "../SerchBar/SerchBar"
 import ImageGallery from "../ImageGallery/ImageGallery"
-// import { fetchArticlesWithTopic } from "../../articles-api"; 
-import { getAsyncImage } from "../../articles-api";
-//import ErrorMessage from "../ErrorMessage/ErrorMessage"
+import { getAsyncImage, params } from "../../articles-api"
+// import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
 // import ImageModal from "../ImageModal/"
 import RotatingLoader from "../Loader/Loader"
-// замінити objects на компонент з посиланням з бібліотеки!!!
+
 export default function App() {
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState('');
   const [loading, setLoading] = useState(false);
-  // const [articles, setArticles] = useState([]);
   const [error, setError] = useState(false);
-
   const [tasks, setTasks] = useState(() => {
     const savClicks = window.localStorage.getItem("my-clicks");
-    return savClicks !== null ? JSON.parse(savClicks) : [];
+    return savClicks !== null ? JSON.parse(savClicks) : items;
   });
 
   useEffect(() => {
@@ -32,12 +38,12 @@ export default function App() {
   useEffect(() => {
     window.localStorage.setItem("my-clicks", JSON.stringify(tasks));
   }, [tasks]);
-  const [articles, setArticles] = useState([]);
+
   useEffect(() => {
     async function fetchArticles() {
       try {
         setLoading(true);
-        // 2. Використовуємо HTTP-функцію
+        // використовуємо HTTP-функцію
         const data = await getAsyncImage("react");
         setArticles(data);
       } catch (error) {
@@ -48,39 +54,75 @@ export default function App() {
     }
     fetchArticles();
   }, []);
-  const handleSearch = topic => {
-    console.log(topic);
+  let searchText = ""
+  let maxStoriges = 0;
+  params.page = 1;
 
-    // const visibleTasks = tasks.filter((task) =>
-    //   task.name.toLowerCase().includes(filter.toLowerCase()));
+  const handleSearch = async (topic) => {
+    params.page += 1;
+
+    try {
+      const dat = getAsyncImage(searchText);
+      maxStoriges = Math.ceil(dat.totalHits / params.per_page); // бере участь коли закінчаться запити
+      ImageGallery(dat.hits);
+      setArticles([]);
+      setError(false);
+      setLoading(true);
+      const data = await fetchArticlesWithTopic(topic);
+      setArticles(data);
+      if (dat.hits.length > 0 && dat.hits.length !== dat.totalHits) {
+      }
+      else
+        if (dat.hits.length === 0) {
+          // handlerErrorUzer(notify);
+          notify()
+          //hiden(refs.loadMoreBtn); hiden(refs.spinnerText);
+          return
+        } // show(refs.loadMoreBtn); // показати кнопку
+      // // вставляю window.scrollBy після того як вставив в дом зображення (тут не через кверіселектор)
+    } catch (error) {
+      setError(true);
+    }
+    finally {
+
+      if (params.page === maxStoriges) {
+        notifyci()
+        setLoading(false);
+      }
+    } console.log(topic);
   };
 
+  const visibleTasks = tasks.filter((task) =>
+    task.name.toLowerCase().includes(filter.toLowerCase()));
+
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
+  // function closeModal() {
+  //   setIsOpen(false);
+  // }
 
   return (
     <>
       <div className={css.headers}>
-        <SerchBar onSearch={handleSearch} />
+        <SerchBar onSearch={handleSearch} onFilter={setFilter} />
       </div>
-
-      <div >
-
+      <div>
         <div>
-
           {loading && <RotatingLoader />}
-          {error && (
-            <p>Whoops, something went wrong! Please try reloading this page!</p>
-          )}
-          {articles.length > 0 && <ImageGallery items={articles} tasks={tasks} />}
+          {error && notifyli()}
+          {articles.length > 0 && <ImageGallery items={articles} tasks={visibleTasks} />}
         </div>
         <>
-
           <LoadMoreBtn />
+          {/* <button onClick={openModal}>Open Modal</button> */}
+          {/* <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            contentLabel="Example Modal"
+          /> */}
           {/* <ImageModal /> */}
           {/* <ErrorMessage /> */}
-
-          {/* <ErrorMessage onAdd={addTask} /> */}
-          {/* <SerchBar value={filter} onFilter={setFilter} /> */}
-
         </>
       </div>
     </>
@@ -102,4 +144,6 @@ export default function App() {
 //   task.name.toLowerCase().includes(filter.toLowerCase()));
 //  <ImageGallery tasks={visibleTasks} objects={objects} onDelete={deleteTask} />
 
-// gpxaaiPUteVQc-DhqqF3GLxbICUzWFNHSgvAwIWoWbg
+
+// !!!
+// gpxaaiPUteVQc-DhqqF3GLxbICUzWFNHSgvAwIWoWbg (key to gallary)

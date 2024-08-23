@@ -1,10 +1,11 @@
 import css from "./ImageCard.module.css"
 import axios from "axios";
 
-export default function ImageCard({ obj: { likes, vies, comments, tags, webformatURL } }) {
+export default function ImageCard({ obj: { likes, vies, comments, tags, webformatURL, largeImageURL } }) {
     return (
 
         <div className={css.card}>
+            <a className={css.imagLag} href={largeImageURL}></a>
             <img className={css.imag} src={webformatURL} alt={tags} />
             <div className={css.cardCommant}>
                 {/* <p className={css.commant}>{username}</p> */}

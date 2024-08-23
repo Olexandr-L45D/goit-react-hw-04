@@ -12,7 +12,7 @@ const params = {
     orientation: "horizontal",
     safesearch: true,
     page: 1,
-    per_page: 15
+    per_page: 16
 };
 
 export { params };
