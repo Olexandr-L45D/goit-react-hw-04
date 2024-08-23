@@ -13,7 +13,7 @@ import RotatingLoader from "../Loader/Loader"
 export default function App() {
   const [filter, setFilter] = useState('');
   const [loading, setLoading] = useState(false);
-  const [articles, setArticles] = useState([]);
+  // const [articles, setArticles] = useState([]);
   const [error, setError] = useState(false);
 
   const [tasks, setTasks] = useState(() => {
@@ -32,7 +32,7 @@ export default function App() {
   useEffect(() => {
     window.localStorage.setItem("my-clicks", JSON.stringify(tasks));
   }, [tasks]);
-
+  const [articles, setArticles] = useState([]);
   useEffect(() => {
     async function fetchArticles() {
       try {
@@ -70,7 +70,7 @@ export default function App() {
           {error && (
             <p>Whoops, something went wrong! Please try reloading this page!</p>
           )}
-          {articles.length > 0 && <ImageGallery items={articles} objects={objects} tasks={tasks} />}
+          {articles.length > 0 && <ImageGallery items={articles} tasks={tasks} />}
         </div>
         <>
 
@@ -87,7 +87,7 @@ export default function App() {
   )
 }
 
-
+//objects={objects} - old paramatars!
 // const addTask = (newTask) => {
 //   setTasks((prevTasks) => {
 //     return [...prevTasks, newTask];

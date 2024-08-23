@@ -21,8 +21,8 @@ async function getAsyncImage(searchText) {
     params.q = searchText;
     const neWurls = new URLSearchParams(params);
     const response = await axios.get(`${ENDPOINT}?${neWurls}`)
-
-    return response.data;
+    return response.data.hits;
+    // return response.data;
 };
 
 export { getAsyncImage };

@@ -1,8 +1,11 @@
 
 import css from "./SerchBar.module.css"
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 import toast, { Toaster } from 'react-hot-toast';
 const notify = () => toast('enter a name.');
-import { params } from "../../articles-api"
+import { getAsyncImage, params } from "../../articles-api"
+import ImageGallery from "../ImageGallery/ImageGallery"
 //import { CiSearch } from "react-icons/ci";
 // Accept - Version: v1
 
@@ -12,13 +15,16 @@ export default function SerchBar({ onSearch }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        // refs.gallery.innerHTML = ''; // додати перевірку на пусто?
         const form = evt.target;
         const topic = form.elements.topic.value;
         params.page = 1;
-        searchText = evt.target.searchQuery.value.toLowerCase().trim();  //значення яке написав користувач(прибираєм пробіл та приводим до нижн регістра)
+        searchText = form.elements.topic.value.toLowerCase().trim()
+        // searchText = evt.target.searchQuery.value.toLowerCase().trim();  //значення яке написав користувач(прибираєм пробіл та приводим до нижн регістра)
         // Якщо текстове поле порожнє, виводимо повідомлення  і припиняємо виконання функції.
         if (form.elements.topic.value.trim() === "") {
             // Toaster("Please enter search term!")
+            alert("Please enter search term!") // поки що Алерт-повідомлення
             return;
         }
         // У протилежному випадку викликаємо пропс  і передаємо йому значення поля
@@ -28,34 +34,48 @@ export default function SerchBar({ onSearch }) {
 
     function handleLoadMore() {   // функція при події клік на кнопці- додавання нових порцій сторінок(збільшую знач page на один, відключаю кнопку, після запиту на сервер відмаловуємо розмітку і включаю як прийшов позитивний результат) 
         params.page += 1;
-        disable(refs.loadMoreBtn, refs.spinnerText);
+        // disable(refs.loadMoreBtn, refs.spinnerText);
 
         setTimeout(async () => {
             try {
                 const data = await getAsyncImage(searchText);
+                maxStoriges = Math.ceil(data.totalHits / params.per_page); // бере участь коли закінчаться запити
+                ImageGallery(data.hits);
+                if (data.hits.length > 0 && data.hits.length !== data.totalHits) {
+                    //enable(refs.loadMoreBtn, refs.spinnerText);
 
-                renderGalleryMarkap(data.hits);
-                const galleryItemScrol = document.querySelector('.gallery-item');
-                const cardHeight = galleryItemScrol.getBoundingClientRect().height;
-                window.scrollBy({                                                 // вставляю window.scrollBy після того як вставив в дом зображення
-                    top: cardHeight * 2,
-                    behavior: "smooth",
-                });
-                show(refs.spinnerText);
+                } else
+                    if (data.hits.length === 0) {
+                        // handlerErrorUzer(notify);
+                        { notify }
+                        //hiden(refs.loadMoreBtn); hiden(refs.spinnerText);
+                        return
+                    }
+                // show(refs.loadMoreBtn); // показати кнопку
+                // // вставляю window.scrollBy після того як вставив в дом зображення
+                // const galleryItemScrol = document.querySelector('.gallery-item');
+                // const cardHeight = galleryItemScrol.getBoundingClientRect().height;
+                // window.scrollBy({                                                 // вставляю window.scrollBy після того як вставив в дом зображення
+                //     top: cardHeight * 2,
+                //     behavior: "smooth",
+                // });
+                // show(refs.spinnerText);
+
             } catch (error) {
                 console.log(error);
-                handlerErrorUzer(error);
+                // handlerErrorUzer(error);
             }
             finally {
-                enable(refs.loadMoreBtn, refs.spinnerText);
+                /// enable(refs.loadMoreBtn, refs.spinnerText);
                 if (params.page === maxStoriges) {
 
                     iziToast.error({
                         title: 'Error',
                         message: "We're sorry, but you've reached the end of search results.",
                     });
-                    refs.loadMoreBtn.removeEventListener("click", handleLoadMore);
-                    hiden(refs.loadMoreBtn); hiden(refs.spinnerText);
+
+                    // refs.loadMoreBtn.removeEventListener("click", handleLoadMore);
+                    // hiden(refs.loadMoreBtn); hiden(refs.spinnerText);
                 }
             }
         }, 500); // затримка сеттаймаутом setTimeout на 0,5 секунди
@@ -75,7 +95,9 @@ export default function SerchBar({ onSearch }) {
     );
 };
 
+// додавав іконку на батон, працює але треба в середину інпута
 // {/* <button className={css.btn}><CiSearch /></button> */}
+
 // export default function SerchBar({ value, onSearch })
 // export default function SerchBar({ value, onFilter }) {
 //     return (
