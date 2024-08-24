@@ -1,30 +1,32 @@
-
-// import ReactDOM from 'react-dom';
-// import Modal from 'react-dom';
 import axios from "axios";
 import css from './App.module.css'
-import React, { useState, useEffect } from "react";
-// import toast, { Toaster } from 'react-hot-toast';
-// const notify = () => toast('enter a name.');
+import { useState, useEffect } from "react";
+import { useMemo } from "react";
+//import toast, { Toaster } from 'react-hot-toast';
+//const notify = () => toast('enter a name.');
 // const notifyli = () => toast('Whoops, something went wrong! Please try reloading this page!');
-// const notifyci = () => toast('Were sorry, but you ve reached the end of search results.');
+//const notifyci = () => toast('Were sorry, but you ve reached the end of search results.');
 import SerchBar from "../SerchBar/SerchBar"
+import RotatingLoader from "../Loader/Loader"
 import ImageGallery from "../ImageGallery/ImageGallery"
-import { getAsyncImage, params } from "../../articles-api"
+import { getAsyncImage } from "../../articles-api"
 // import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
-// import ImageModal from "../ImageModal/"
-import RotatingLoader from "../Loader/Loader"
+import ImageModal from "../ImageModal/ImageModal"
+var colors = ["#74B087", "#DE7300", "#74B087"];
 
 export default function App() {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [query, setQuery] = useState("");
+  const [totalPages, setTotalPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [tasks, setTasks] = useState(() => {
     const savClicks = window.localStorage.getItem("my-clicks");
-    return savClicks !== null ? JSON.parse(savClicks) : items;
+    return savClicks !== null && JSON.parse(savClicks);
   });
 
   useEffect(() => {
@@ -38,69 +40,46 @@ export default function App() {
   useEffect(() => {
     window.localStorage.setItem("my-clicks", JSON.stringify(tasks));
   }, [tasks]);
-
-  useEffect(() => {
-    async function fetchArticles() {
-      try {
-        setLoading(true);
-        // використовуємо HTTP-функцію
-        const data = await getAsyncImage("react");
-        setArticles(data);
-      } catch (error) {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchArticles();
-  }, []);
-  let searchText = ""
-  let maxStoriges = 0;
-  params.page = 1;
-
+  //let maxStoriges = 1000;
   const handleSearch = async (topic) => {
-    params.page += 1;
-
     try {
-      const dat = getAsyncImage(searchText);
-      maxStoriges = Math.ceil(dat.totalHits / params.per_page); // бере участь коли закінчаться запити
-      ImageGallery(dat.hits);
       setArticles([]);
       setError(false);
       setLoading(true);
-      const data = await fetchArticlesWithTopic(topic);
-      setArticles(data);
-      if (dat.hits.length > 0 && dat.hits.length !== dat.totalHits) {
-      }
-      else
-        if (dat.hits.length === 0) {
-          // handlerErrorUzer(notify);
-          notify()
-          //hiden(refs.loadMoreBtn); hiden(refs.spinnerText);
-          return
-        } // show(refs.loadMoreBtn); // показати кнопку
-      // // вставляю window.scrollBy після того як вставив в дом зображення (тут не через кверіселектор)
+      setQuery(topic)
+      setPage(1)
+      // використовуємо HTTP-функцію
+      const data = await getAsyncImage(topic);
+      // maxStoriges = Math.ceil(data.total / data.total_pages); // бере участь коли закінчаться запити
+      setPage(page + 1)
+      setArticles(data.results);
+      setTotalPage(data.total_pages)
+      // if (data.results.length > 0 && data.results.length !== data.total_pages) {
+      // }
+      // else
+      //   if (data.results.length === 0) {
+      //     notify()
+      //     //hiden(refs.loadMoreBtn); hiden(refs.spinnerText);
+      //     return
+      //   } // show(refs.loadMoreBtn); // показати кнопку
+      // // // вставляю window.scrollBy після того як вставив в дом зображення (тут не через кверіселектор)
     } catch (error) {
       setError(true);
     }
     finally {
 
-      if (params.page === maxStoriges) {
-        notifyci()
-        setLoading(false);
-      }
+      // if (data.results === maxStoriges) {
+      //   notifyci()
+      //   setLoading(false);
+      // }
+
     } console.log(topic);
   };
 
-  const visibleTasks = tasks.filter((task) =>
-    task.name.toLowerCase().includes(filter.toLowerCase()));
-
-  // function openModal() {
-  //   setIsOpen(true);
-  // }
-  // function closeModal() {
-  //   setIsOpen(false);
-  // }
+  const visibleTasks = useMemo(() => tasks.filter((task) =>
+    task.name.toLowerCase().includes(query)),
+    [tasks, query]
+  );
 
   return (
     <>
@@ -108,26 +87,36 @@ export default function App() {
         <SerchBar onSearch={handleSearch} onFilter={setFilter} />
       </div>
       <div>
-        <div>
+        <>
           {loading && <RotatingLoader />}
-          {error && notifyli()}
           {articles.length > 0 && <ImageGallery items={articles} tasks={visibleTasks} />}
-        </div>
+        </>
         <>
           <LoadMoreBtn />
-          {/* <button onClick={openModal}>Open Modal</button> */}
-          {/* <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            contentLabel="Example Modal"
-          /> */}
-          {/* <ImageModal /> */}
+
+          {/* <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)} /> */}
+          <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)}>
+            <button>Modal</button></ImageModal>
+
           {/* <ErrorMessage /> */}
         </>
+        <>
+          {/* <button onClick={() => setClicks(clicks + 1)}>
+            Number of clicks: {clicks}
+          </button> */}
+          {/* <ul>
+            {filtereImages.map(planet => (
+              <li key={planet}>{planet}</li>
+            ))}
+          </ul> */}
+        </>
+
       </div>
     </>
   )
 }
+
+// tasks = { visibleTasks } 
 
 //objects={objects} - old paramatars!
 // const addTask = (newTask) => {

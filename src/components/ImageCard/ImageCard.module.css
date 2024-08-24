@@ -7,17 +7,15 @@
     flex-direction: column;
     text-align: center;
     align-items: center;
-    color: rgb(14, 15, 15);
-    /* border: 1px solid black;
-    border-color: black;
-    border-radius: 1px; */
+    color: rgb(241, 248, 248);
+
 }
 
 .imag {
     width: 270px;
     height: 130px;
     padding: 2px;
-    margin: 2px;
+    margin: 5px;
     border-radius: 5px;
 }
 
@@ -31,17 +29,15 @@
     height: 20px;
     padding: 0px;
     margin: 0px;
+    margin-top: 4px;
     display: flex;
     flex-direction: row;
     text-align: center;
     align-items: center;
-    /* color: rgb(14, 15, 15);
-    border: 1px solid black;
-    border-color: black; */
 }
 
 .comItem {
-    width: 50px;
+    width: 100px;
     height: 20px;
     padding: 0px;
     margin: 0px;
@@ -77,12 +73,23 @@
 }
 
 .commant {
-    padding: 10px;
+    padding: 5px;
+    padding-left: 0px;
     margin: 2px;
-    color: black;
+    margin-left: 0px;
+    color: rgb(243, 239, 239);
     font-size: 1em;
     font-weight: 300;
     line-height: 1;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+}
+
+.icon {
+    padding: 0px;
+    margin: 5px;
     display: flex;
     flex-direction: row;
     text-align: center;

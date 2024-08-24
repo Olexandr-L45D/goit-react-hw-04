@@ -7,13 +7,12 @@ const notify = () => toast('enter a name.');
 
 
 export default function SerchBar({ value, onSearch, onFilter }) {
-    let searchText = ""
+    // let searchText = ""
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
         const form = evt.target;
-        const topic = form.elements.topic.value;
-        searchText = form.elements.topic.value.toLowerCase().trim()
+        const topic = form.elements.topic.value.toLowerCase().trim();
 
         // Якщо текстове поле порожнє, виводимо повідомлення ('enter a name.') і припиняємо виконання функції.
         if (form.elements.topic.value.trim() === "") {

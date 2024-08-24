@@ -101,3 +101,92 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.rect {
+  background: linear-gradient(-119deg,
+
+      dark-gray 100%);
+}
+
+:root {
+  --w: 80px;
+  --single-unit: 20px;
+  --dot-size: 5px;
+  --speed: 1.5s;
+}
+
+.box {
+  color: #B8AFE6;
+  position: relative;
+  display: grid;
+  align-content: center;
+  width: var(--w);
+  height: var(--single-unit);
+  border: 1px solid color-mix(in lab, currentcolor 70%, #fff);
+  border-radius: calc(var(--single-unit) * .2);
+  background-image:
+    radial-gradient(circle at center,
+      currentcolor 0 25%,
+      #0000 0);
+  background-repeat: repeat-x;
+  background-size: var(--single-unit) var(--single-unit);
+  animation: movebg linear infinite calc(var(--speed));
+}
+
+.dot {
+  position: relative;
+  left: calc(var(--single-unit) + var(--dot-size));
+  border-radius: 100vmax;
+  width: calc(var(--single-unit) + var(--dot-size));
+  height: var(--dot-size);
+  border: 1.5px solid #f9f6ef;
+  background-color: #f9f6ef;
+  animation: dot linear calc(var(--speed)) infinite;
+  transform-origin: left;
+}
+
+@keyframes dot {
+
+  0%,
+  100% {
+    width: var(--dot-size);
+  }
+
+  33.3% {
+    left: calc(var(--single-unit) + var(--dot-size));
+    width: calc(var(--single-unit) + var(--dot-size));
+  }
+
+  66.6% {
+    width: var(--dot-size);
+    left: calc(2 * var(--single-unit) + var(--dot-size))
+  }
+}
+
+@keyframes movebg {
+
+  0%,
+  66.6% {
+    background-position-x: 0;
+  }
+
+  100% {
+    background-position-x: calc(var(--single-unit) * -1);
+  }
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  font-family: system-ui, sans-serif;
+  font-size: 1.1rem;
+  color: #B8AFE6;
+  background: radial-gradient(at 100% 20%, #5eb0e525, #0000 70%),
+    radial-gradient(at 20% 20%, #f3d06025, #0000 70%),
+    radial-gradient(at 20% 100%, #a5282c25, #0000 70%),
+    radial-gradient(at 100% 100%, #aee1cd25, #0000 70%), #1f2020;
+  background-blend-mode: color-dodge;
+}

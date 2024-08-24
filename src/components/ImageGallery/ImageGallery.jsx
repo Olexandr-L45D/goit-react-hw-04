@@ -8,8 +8,8 @@ export default function ImageGallery({ items }) {
             <div >
                 <ul className={css.list}>
                     {items.map((task) => (
-                        <li className={css.item} key={task.id} >
-                            <ImageCard obj={task} ><a href={task.url} target="_blank" rel="noreferrer noopener"> </a></ImageCard>
+                        <li className={css.item} key={task.id}>
+                            <ImageCard obj={task} ><a href={task.urls} target="_blank" rel="noreferrer noopener"> </a></ImageCard>
                         </li>
                     ))  
                     }
