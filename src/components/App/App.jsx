@@ -13,10 +13,10 @@ import { getAsyncImage } from "../../articles-api"
 // import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
 // import ImageModal from "../ImageModal/ImageModal"
-var colors = ["#74B087", "#DE7300", "#74B087"];
+// var colors = ["#74B087", "#DE7300", "#74B087"];
 
 export default function App() {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  // const [modalIsOpen, setIsOpen] = useState(false);
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState('');
   const [loading, setLoading] = useState(false);
@@ -40,21 +40,23 @@ export default function App() {
   useEffect(() => {
     window.localStorage.setItem("my-clicks", JSON.stringify(tasks));
   }, [tasks]);
-  //let maxStoriges = 1000;
+
   const handleSearch = async (topic) => {
     try {
       setArticles([]);
       setError(false);
       setLoading(true);
+
       setQuery(topic)
       setPage(1)
       // використовуємо HTTP-функцію
       const data = await getAsyncImage(topic);
-      // maxStoriges = Math.ceil(data.total / data.total_pages); // бере участь коли закінчаться запити
+      // totalPages = Math.ceil(data.total / data.total_pages); // бере участь коли закінчаться запити
       setPage(page + 1)
       setArticles(data.results);
       setTotalPage(data.total_pages)
       // if (data.results.length > 0 && data.results.length !== data.total_pages) {
+      //setLoading(true);
       // }
       // else
       //   if (data.results.length === 0) {
@@ -65,6 +67,8 @@ export default function App() {
       // // // вставляю window.scrollBy після того як вставив в дом зображення (тут не через кверіселектор)
     } catch (error) {
       setError(true);
+      //setLoading(false);
+      setLoading(true);
     }
     finally {
 
@@ -81,34 +85,29 @@ export default function App() {
   //   [tasks, query]
   // );
 
-  function addTask() {   // функція при події клік на кнопці- додавання нових порцій сторінок(збільшую знач page на один, відключаю кнопку, після запиту на сервер відмаловуємо розмітку і включаю як прийшов позитивний результат) 
-    //setPage(+1)
-    // disable(refs.loadMoreBtn, refs.spinnerText);
+  function addTask(newTask) {   // функція при події клік на кнопці- додавання нових порцій сторінок(збільшую знач page на один, відключаю кнопку, після запиту на сервер відмаловуємо розмітку і включаю як прийшов позитивний результат) 
+
     setTimeout(async () => {
       try {
         const data = await getAsyncImage(topic);
-        setPage(page + 1)
+        //setPage(page + 1)
         setArticles(data.results);
         setTotalPage(data.total_pages)
-        // show(refs.spinnerText);
+        setPage((prevTasks) => {
+          return [...prevTasks, newTask];
+        });
+
       } catch (error) {
         console.log(error);
-        // handlerErrorUzer(error);
+        setLoading(true);
       }
       finally {
-        // enable(refs.loadMoreBtn, refs.spinnerText);
-        // if (data.results === maxStoriges) {
+        // if (data.results === totalPages) {
         //   setLoading(false);
         // }
       }
     }, 500); // затримка сеттаймаутом setTimeout на 0,5 секунди
   };
-
-  // const addTask = (newTask) => {
-  //   setPage((prevTasks) => {
-  //     return [...prevTasks, newTask];
-  //   });
-  // };
 
   return (
     <>
@@ -117,15 +116,15 @@ export default function App() {
       </div>
       <div>
         <>
-          {<RotatingLoader /> && loading}
-          {articles.length > 0 && <ImageGallery items={articles} />}
+          {/* {<RotatingLoader /> && loading} */}
+
+          {articles.length > 0 && <ImageGallery items={articles} setPage={page + 1} />}
         </>
         <>
+          {loading && <RotatingLoader />}
           <LoadMoreBtn onAdd={addTask} />
 
           {/* <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)} /> */}
-          {/* <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)}>
-            <button>Modal</button></ImageModal> */}
 
           {/* <ErrorMessage /> */}
         </>

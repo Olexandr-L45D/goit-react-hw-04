@@ -1,10 +1,12 @@
 import React from 'react';
+import css from "./ImageModal.module.css"
+import { useState } from "react";
 import Modal from 'react-modal';
 import { FiCheckSquare } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
 // import { ReactComponent as CloseIcon } from "./close-icon.svg"
 // { isOpen, onClose } - методи в імеджмодал
-export default function ImageModal() {
+export default function ImageModal({ obj: { urls: { small, regular } } }) {
   const customStyles = {
     content: {
       top: '50%',
@@ -16,7 +18,7 @@ export default function ImageModal() {
     },
   };
 
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
     setIsOpen(true);
   }
@@ -27,7 +29,7 @@ export default function ImageModal() {
     <div>
       <button onClick={openModal}></button>
       <Modal
-        // isOpen={isOpen}
+        // modal={modal}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
@@ -39,12 +41,9 @@ export default function ImageModal() {
         <button onClick={closeModal}>
           <FiX />
         </button>
+        <img className={css.imagLag} src={regular} alt={tags} />
         <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
+          {/* <button>tab navigation <a className={css.imagLag} href={regular}></a></button> */}
         </form>
       </Modal>
     </div>
