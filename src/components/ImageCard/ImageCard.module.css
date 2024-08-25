@@ -8,7 +8,6 @@
     text-align: center;
     align-items: center;
     color: rgb(241, 248, 248);
-
 }
 
 .imag {
@@ -25,7 +24,7 @@
 }
 
 .cardCommant {
-    width: 270px;
+    width: 260px;
     height: 20px;
     padding: 0px;
     margin: 0px;
@@ -37,7 +36,7 @@
 }
 
 .comItem {
-    width: 100px;
+    width: 120px;
     height: 20px;
     padding: 0px;
     margin: 0px;
@@ -45,7 +44,6 @@
     flex-direction: row;
     text-align: center;
     align-items: center;
-
 }
 
 .comIte {
@@ -57,7 +55,6 @@
     flex-direction: row;
     text-align: center;
     align-items: center;
-
 }
 
 .comIt {
@@ -69,7 +66,6 @@
     flex-direction: row;
     text-align: center;
     align-items: center;
-
 }
 
 .commant {
@@ -78,9 +74,9 @@
     margin: 2px;
     margin-left: 0px;
     color: rgb(243, 239, 239);
-    font-size: 1em;
-    font-weight: 300;
-    line-height: 1;
+    font-size: 0em;
+    font-weight: 0;
+    line-height: 0;
     display: flex;
     flex-direction: row;
     text-align: center;
@@ -89,34 +85,139 @@
 
 .icon {
     padding: 0px;
-    margin: 5px;
+    margin: 2px;
+    color: blue;
     display: flex;
     flex-direction: row;
     text-align: center;
     align-items: center;
+    /* border: 0.5px solid rgb(245, 240, 240);
+    border-color: rgb(247, 243, 243);
+    border-radius: 5px; */
 }
 
 @media screen and (min-width: 768px) {
-
+    .cardCommant {
+        width: 250px;
+        height: 10px;
+        padding: 0px;
+        margin: 0px;
+        /* margin-top: 1px; */
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+    }
 
     .imag {
-        width: 300px;
-        height: 150px;
+        width: 270px;
+        height: 165px;
         padding: 2px;
-        margin: 1px;
+        margin: 2px;
+    }
 
+    .commant {
+        padding: 3px;
+        padding-left: 0px;
+        margin: 1px;
+        margin-left: 0px;
+        color: rgb(243, 239, 239);
+        font-size: 0.7em;
+        font-weight: 200;
+        line-height: 0.6;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+    }
+
+    .comItem {
+        width: 80px;
+        height: 20px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .comIte {
+        width: 40px;
+        height: 20px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .comIt {
+        width: 50px;
+        height: 20px;
+        padding: 0px;
+        margin: 0px;
     }
 }
 
 @media screen and (min-width: 1270px) {
 
+    .cardCommant {
+        width: 310px;
+        height: 20px;
+        padding: 0px;
+        margin: 0px;
+        margin-top: 1px;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+    }
 
     .imag {
-        width: 320px;
+        width: 334px;
         height: 165px;
+        padding: 2px;
+        margin: 1px;
+    }
 
+    .commant {
+        padding: 5px;
+        padding-left: 0px;
+        margin: 1px;
+        margin-left: 0px;
+        color: rgb(243, 239, 239);
+        font-size: 0.9em;
+        font-weight: 300;
+        line-height: 1;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+    }
+
+    .comItem {
+        width: 120px;
+        height: 20px;
+    }
+
+    .comIte {
+        width: 60px;
+        height: 20px;
+    }
+
+    .comIt {
+        width: 100px;
+        height: 20px;
+    }
+
+    .icon {
+        padding: 0px;
+        margin: 2px;
+        color: blue;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+        /* border: 0.5px solid rgb(245, 240, 240);
+        border-color: rgb(247, 243, 243);
+        border-radius: 5px; */
     }
 }
+
 
 @media screen and (min-width: 1440px) {
 

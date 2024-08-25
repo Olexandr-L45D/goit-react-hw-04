@@ -1,22 +1,25 @@
 import css from "./ImageCard.module.css"
-import { FcInfo } from "react-icons/fc";
+import { FiUser } from "react-icons/fi";
+import { FiThumbsUp } from "react-icons/fi";
+import ImageModal from "../ImageModal/ImageModal"
 
 export default function ImageCard({ obj: { user: { first_name, instagram_username }, likes, tags, urls: { small, regular } } }) {
     return (
 
-        <div className={css.card}>
+        <div className={css.card}  >
             <a className={css.imagLag} href={regular}></a>
             <img className={css.imag} src={small} alt={tags} />
+
+
             <div className={css.cardCommant}>
-                {/* <p className={css.commant}>{username}</p> */}
                 <div className={css.comItem}>
                     <p className={css.commant}>Autor: {first_name}</p>
                 </div>
                 <div className={css.comIte}>
-                    <p className={css.commant}>likes: {likes}</p>
+                    <p className={css.commant}><FiThumbsUp className={css.icon} /> {likes}</p>
                 </div>
                 <div className={css.comIt}>
-                    <p className={css.commant}><FcInfo className={css.icon} /> {instagram_username}</p>
+                    <p className={css.commant}><FiUser className={css.icon} /> {instagram_username}</p>
                 </div>
 
             </div>
@@ -24,3 +27,5 @@ export default function ImageCard({ obj: { user: { first_name, instagram_usernam
 
     );
 }
+
+// { <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)} /> } 

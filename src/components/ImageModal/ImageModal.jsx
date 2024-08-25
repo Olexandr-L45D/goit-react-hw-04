@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import { FiCheckSquare } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 // import { ReactComponent as CloseIcon } from "./close-icon.svg"
 // { isOpen, onClose } - методи в імеджмодал
 export default function ImageModal() {
@@ -24,7 +25,7 @@ export default function ImageModal() {
   }
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
+      <button onClick={openModal}></button>
       <Modal
         // isOpen={isOpen}
         isOpen={modalIsOpen}
@@ -35,11 +36,9 @@ export default function ImageModal() {
         {/* <button onClick={openModal}>Open Modal</button> */}
 
         {/* <button onClick={() => onClose}> */}
-
         <button onClick={closeModal}>
-          <FiCheckSquare />
+          <FiX />
         </button>
-        <div>I am a modal</div>
         <form>
           <input />
           <button>tab navigation</button>

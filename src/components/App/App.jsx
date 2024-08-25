@@ -12,7 +12,7 @@ import ImageGallery from "../ImageGallery/ImageGallery"
 import { getAsyncImage } from "../../articles-api"
 // import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
-import ImageModal from "../ImageModal/ImageModal"
+// import ImageModal from "../ImageModal/ImageModal"
 var colors = ["#74B087", "#DE7300", "#74B087"];
 
 export default function App() {
@@ -76,10 +76,39 @@ export default function App() {
     } console.log(topic);
   };
 
-  const visibleTasks = useMemo(() => tasks.filter((task) =>
-    task.name.toLowerCase().includes(query)),
-    [tasks, query]
-  );
+  // const visibleTasks = useMemo(() => tasks.filter((task) =>
+  //   task.name.toLowerCase().includes(query)),
+  //   [tasks, query]
+  // );
+
+  function addTask() {   // функція при події клік на кнопці- додавання нових порцій сторінок(збільшую знач page на один, відключаю кнопку, після запиту на сервер відмаловуємо розмітку і включаю як прийшов позитивний результат) 
+    //setPage(+1)
+    // disable(refs.loadMoreBtn, refs.spinnerText);
+    setTimeout(async () => {
+      try {
+        const data = await getAsyncImage(topic);
+        setPage(page + 1)
+        setArticles(data.results);
+        setTotalPage(data.total_pages)
+        // show(refs.spinnerText);
+      } catch (error) {
+        console.log(error);
+        // handlerErrorUzer(error);
+      }
+      finally {
+        // enable(refs.loadMoreBtn, refs.spinnerText);
+        // if (data.results === maxStoriges) {
+        //   setLoading(false);
+        // }
+      }
+    }, 500); // затримка сеттаймаутом setTimeout на 0,5 секунди
+  };
+
+  // const addTask = (newTask) => {
+  //   setPage((prevTasks) => {
+  //     return [...prevTasks, newTask];
+  //   });
+  // };
 
   return (
     <>
@@ -88,15 +117,15 @@ export default function App() {
       </div>
       <div>
         <>
-          {loading && <RotatingLoader />}
-          {articles.length > 0 && <ImageGallery items={articles} tasks={visibleTasks} />}
+          {<RotatingLoader /> && loading}
+          {articles.length > 0 && <ImageGallery items={articles} />}
         </>
         <>
-          <LoadMoreBtn />
+          <LoadMoreBtn onAdd={addTask} />
 
           {/* <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)} /> */}
-          <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)}>
-            <button>Modal</button></ImageModal>
+          {/* <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)}>
+            <button>Modal</button></ImageModal> */}
 
           {/* <ErrorMessage /> */}
         </>
@@ -116,6 +145,7 @@ export default function App() {
   )
 }
 
+// { loading && <RotatingLoader /> }
 // tasks = { visibleTasks } 
 
 //objects={objects} - old paramatars!
