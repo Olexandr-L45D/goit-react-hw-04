@@ -7,106 +7,66 @@ import { useMemo } from "react";
 // const notifyli = () => toast('Whoops, something went wrong! Please try reloading this page!');
 //const notifyci = () => toast('Were sorry, but you ve reached the end of search results.');
 import SerchBar from "../SerchBar/SerchBar"
-import RotatingLoader from "../Loader/Loader"
+import ColorRing from "../Loader/Loader"
 import ImageGallery from "../ImageGallery/ImageGallery"
 import { getAsyncImage } from "../../articles-api"
 // import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
-// import ImageModal from "../ImageModal/ImageModal"
-// var colors = ["#74B087", "#DE7300", "#74B087"];
+import ImageModal from "../ImageModal/ImageModal"
 
 export default function App() {
-  // const [modalIsOpen, setIsOpen] = useState(false);
+  //const [modalIsOpen, setIsOpen] = useState(false);
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [query, setQuery] = useState("");
-  const [totalPages, setTotalPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1000);
   const [page, setPage] = useState(1);
-  const [tasks, setTasks] = useState(() => {
+  const [topic, setTopic] = useState(() => {
     const savClicks = window.localStorage.getItem("my-clicks");
-    return savClicks !== null && JSON.parse(savClicks);
+    return savClicks !== null && JSON.parse(savClicks) && "";
   });
-
   useEffect(() => {
     const isLocalStorData = Boolean(localStorage.getItem("my-clicks"));
     if (isLocalStorData) {
       const data = localStorage.getItem("my-clicks");
-      setTasks(JSON.parse(data));
+      setTopic(JSON.parse(data));
     }
   }, []);
-
   useEffect(() => {
-    window.localStorage.setItem("my-clicks", JSON.stringify(tasks));
-  }, [tasks]);
-
-  const handleSearch = async (topic) => {
-    try {
-      setArticles([]);
-      setError(false);
-      setLoading(true);
-
-      setQuery(topic)
-      setPage(1)
-      // використовуємо HTTP-функцію
-      const data = await getAsyncImage(topic);
-      // totalPages = Math.ceil(data.total / data.total_pages); // бере участь коли закінчаться запити
-      setPage(page + 1)
-      setArticles(data.results);
-      setTotalPage(data.total_pages)
-      // if (data.results.length > 0 && data.results.length !== data.total_pages) {
-      //setLoading(true);
-      // }
-      // else
-      //   if (data.results.length === 0) {
-      //     notify()
-      //     //hiden(refs.loadMoreBtn); hiden(refs.spinnerText);
-      //     return
-      //   } // show(refs.loadMoreBtn); // показати кнопку
-      // // // вставляю window.scrollBy після того як вставив в дом зображення (тут не через кверіселектор)
-    } catch (error) {
-      setError(true);
-      //setLoading(false);
-      setLoading(true);
+    window.localStorage.setItem("my-clicks", JSON.stringify(topic));
+  }, [topic]);
+  // перший фетч http на ефекті щоб спрацювало один раз при монтуванні
+  useEffect(() => {
+    if (topic === "") {
+      return;
     }
-    finally {
-
-      // if (data.results === maxStoriges) {
-      //   notifyci()
-      //   setLoading(false);
-      // }
-
-    } console.log(topic);
-  };
-
-  // const visibleTasks = useMemo(() => tasks.filter((task) =>
-  //   task.name.toLowerCase().includes(query)),
-  //   [tasks, query]
-  // );
-
-  function addTask(newTask) {   // функція при події клік на кнопці- додавання нових порцій сторінок(збільшую знач page на один, відключаю кнопку, після запиту на сервер відмаловуємо розмітку і включаю як прийшов позитивний результат) 
-
-    setTimeout(async () => {
+    async function getArticles() {
       try {
-        const data = await getAsyncImage(topic);
-        //setPage(page + 1)
-        setArticles(data.results);
-        setTotalPage(data.total_pages)
-        setPage((prevTasks) => {
-          return [...prevTasks, newTask];
-        });
-
-      } catch (error) {
-        console.log(error);
         setLoading(true);
+        setError(false);
+        const data = await getAsyncImage(topic, page);
+        setArticles((prevState) => [...prevState, ...data.results]); // подвійне розпилення обовязкове тому що ми додаємо до вже існуючого масиву/сторінки
+        setTotalPages(data.total_pages);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
       }
-      finally {
-        // if (data.results === totalPages) {
-        //   setLoading(false);
-        // }
-      }
-    }, 500); // затримка сеттаймаутом setTimeout на 0,5 секунди
+    }
+    getArticles();
+    console.log(topic);
+  }, [page, topic]);
+
+  const handleSearch = (newTopic) => {
+    setTopic(newTopic);
+    setPage(1);
+    setArticles([]);
+  };
+  // функція handleLoadMore при події клік на кнопці- додавання нових порцій сторінок(збільшую знач page на один, відключаю кнопку, після запиту на сервер відмаловуємо розмітку і включаю як прийшов позитивний результат)
+  const handleLoadMore = () => {
+    setPage(page + 1);
   };
 
   return (
@@ -116,27 +76,19 @@ export default function App() {
       </div>
       <div>
         <>
-          {/* {<RotatingLoader /> && loading} */}
-
           {articles.length > 0 && <ImageGallery items={articles} setPage={page + 1} />}
         </>
         <>
-          {loading && <RotatingLoader />}
-          <LoadMoreBtn onAdd={addTask} />
+          {page >= totalPages && <b>END OF COLLECTION!!!!</b>}
+          {error && <b>ERROR!!!</b>}
+          {loading && <ColorRing />}
+          {articles.length > 0 && !loading && (
+            <LoadMoreBtn onAdd={handleLoadMore} />
+          )}
 
-          {/* <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)} /> */}
+          {/* <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)} onOpen={openModal} onAfteropen={afterOpenModal} onClose={closeModal} /> */}
 
           {/* <ErrorMessage /> */}
-        </>
-        <>
-          {/* <button onClick={() => setClicks(clicks + 1)}>
-            Number of clicks: {clicks}
-          </button> */}
-          {/* <ul>
-            {filtereImages.map(planet => (
-              <li key={planet}>{planet}</li>
-            ))}
-          </ul> */}
         </>
 
       </div>
@@ -144,7 +96,18 @@ export default function App() {
   )
 }
 
-// { loading && <RotatingLoader /> }
+// function openModal() {
+//   setIsOpen(true);
+// }
+// function afterOpenModal() {
+//   // references are now sync'd and can be accessed.
+//   // <img src={regular} alt={tags} />
+//   //subtitle.style.color = '#f00';
+// }
+// function closeModal() {
+//   setIsOpen(false);
+// }
+
 // tasks = { visibleTasks } 
 
 //objects={objects} - old paramatars!

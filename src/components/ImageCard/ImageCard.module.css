@@ -91,18 +91,14 @@
     flex-direction: row;
     text-align: center;
     align-items: center;
-    /* border: 0.5px solid rgb(245, 240, 240);
-    border-color: rgb(247, 243, 243);
-    border-radius: 5px; */
 }
 
 @media screen and (min-width: 768px) {
     .cardCommant {
         width: 250px;
-        height: 10px;
+        height: 20px;
         padding: 0px;
         margin: 0px;
-        /* margin-top: 1px; */
         display: flex;
         flex-direction: row;
         text-align: center;
@@ -119,7 +115,7 @@
     .commant {
         padding: 3px;
         padding-left: 0px;
-        margin: 1px;
+        margin: 2px;
         margin-left: 0px;
         color: rgb(243, 239, 239);
         font-size: 0.7em;
