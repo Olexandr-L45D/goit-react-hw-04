@@ -1,12 +1,23 @@
 import React from 'react';
-import style from "./ImageModal.module.css"
+import css from "./ImageModal.module.css"
 import { useState } from "react";
 import Modal from 'react-modal';
 import { FiCheckSquare } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
-// import { ReactComponent as CloseIcon } from "./close-icon.svg"
-// { isOpen, onClose } - методи в імеджмодал
-export default function ImageModal({ onOpen, onAfteropen, onClose }) {
+
+Modal.setAppElement("#root");
+export default function ImageModal({ isOpen, data, onClose, afteOpan }) {
+  if (!data) {
+    return null;
+  }
+  const {
+    regular,
+    alt_description,
+    description,
+    likes,
+    instagram_username,
+    name,
+  } = data;
   const customStyles = {
     content: {
       top: '50%',
@@ -17,34 +28,47 @@ export default function ImageModal({ onOpen, onAfteropen, onClose }) {
       transform: 'translate(-50%, -50%)',
     },
   };
-  onOpen();
-  onAfteropen();
-  onClose();
+
+  // onOpen();
+  // onAfteropen();
+  // onClose();
   return (
     <div>
-      {/* <button onClick={openModal}></button> */}
       <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
+        isOpen={isOpen}
+        onRequestClose={onRequestClose}
+        className={css.modal}
+        overlayClassName={css.overlay}
+        afteOpan={afteOpan}
       >
-        <h2 className={style.imagLag} ref={(_img) => (img = _img)}></h2>
-        {/* <a className={style.imagLag} href={regular}></a> */}
-        {/* <img className={style.imagLag} ref={(_img) => (img = _img)} /> */}
-        {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
-        <button onClick={closeModal}>
+        <div className={css.content}>
+          <img src={regular} alt={alt_description} className={css.image} />
+          <div className={css.details}>
+            <p>
+              <strong>Author:</strong> {name}
+            </p>
+            {instagram_username && (
+              <p>
+                <strong>Instagram:</strong> @{instagram_username}
+              </p>
+            )}
+            {description && (
+              <p>
+                <strong>Description:</strong> {description}
+              </p>
+            )}
+            <p>
+              <strong>Likes:</strong> {likes}
+            </p>
+          </div>
+        </div>
+        <button onClose={onClose}>
           <FiX />
         </button>
-        <img className={css.imagLag} src={regular} alt={tags} />
-        <form>
-          {/* <button>tab navigation <a className={css.imagLag} href={regular}></a></button> */}
-        </form>
       </Modal>
     </div>
   );
 }
 
-// ReactDOM.render(<App />, appElement);
+
 

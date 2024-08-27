@@ -1,9 +1,7 @@
 .list {
     width: 100%;
     margin: 0px;
-    margin-top: 60px;
     padding: 0px;
-    padding-top: 70px;
     display: flex;
     text-align: center;
     align-items: center;
@@ -71,7 +69,6 @@
         height: auto;
         padding: 0px;
         margin: 0px;
-        margin-top: 45px;
         list-style: none;
         display: flex;
         flex-wrap: wrap;

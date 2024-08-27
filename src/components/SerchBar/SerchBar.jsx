@@ -22,7 +22,7 @@ export default function SerchBar({ value, onSearch, onFilter }) {
     return (
         <header className={css.header}>
             <div className={css.items}>
-                <form onSubmit={handleSubmit}>
+                <form className={css.form} onSubmit={handleSubmit}>
 
                     <button className={css.submitButton} type="submit"> <CiSearch /></button>
                     <Toaster />

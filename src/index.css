@@ -28,15 +28,15 @@ body {
   padding: 0px;
   background-color: rgb(229, 127, 255);
   place-items: center;
-  /* min-width: 320px;
-  min-height: 100vh; */
+  min-width: 320px;
+  min-height: 100vh;
   text-align: center;
   align-items: center;
 }
 
 .container {
 
-  width: 1600px;
+  width: 100%;
   padding: 0px;
   margin: 0 auto;
 }

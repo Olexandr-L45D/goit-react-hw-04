@@ -15,12 +15,12 @@ import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
 import ImageModal from "../ImageModal/ImageModal"
 
 export default function App() {
-  //const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [selectedPicture, setSelected] = useState(null);
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [query, setQuery] = useState("");
   const [totalPages, setTotalPages] = useState(1000);
   const [page, setPage] = useState(1);
   const [topic, setTopic] = useState(() => {
@@ -68,6 +68,18 @@ export default function App() {
   const handleLoadMore = () => {
     setPage(page + 1);
   };
+  const openModal = (data) => {
+    setIsOpen(true);
+    setSelected(data)
+  };
+  const afterOpenModal = (first) => {
+    setSelected(first)
+  };
+
+  function closeModal() {
+    setIsOpen(false);
+    setSelected(null)
+  }
 
   return (
     <>
@@ -86,7 +98,7 @@ export default function App() {
             <LoadMoreBtn onAdd={handleLoadMore} />
           )}
 
-          {/* <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)} onOpen={openModal} onAfteropen={afterOpenModal} onClose={closeModal} /> */}
+          <ImageModal isOpen={openModal} data={selectedPicture} afteOpan={afterOpenModal} onClose={closeModal} />
 
           {/* <ErrorMessage /> */}
         </>
@@ -96,35 +108,3 @@ export default function App() {
   )
 }
 
-// function openModal() {
-//   setIsOpen(true);
-// }
-// function afterOpenModal() {
-//   // references are now sync'd and can be accessed.
-//   // <img src={regular} alt={tags} />
-//   //subtitle.style.color = '#f00';
-// }
-// function closeModal() {
-//   setIsOpen(false);
-// }
-
-// tasks = { visibleTasks } 
-
-//objects={objects} - old paramatars!
-// const addTask = (newTask) => {
-//   setTasks((prevTasks) => {
-//     return [...prevTasks, newTask];
-//   });
-// };
-// const deleteTask = (taskId) => {
-//   setTasks((prevTasks) => {
-//     return prevTasks.filter((task) => task.id !== taskId);
-//   });
-// };
-// const visibleTasks = tasks.filter((task) =>
-//   task.name.toLowerCase().includes(filter.toLowerCase()));
-//  <ImageGallery tasks={visibleTasks} objects={objects} onDelete={deleteTask} />
-
-
-// !!!
-// gpxaaiPUteVQc-DhqqF3GLxbICUzWFNHSgvAwIWoWbg (key to gallary)
