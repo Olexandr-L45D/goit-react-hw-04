@@ -2,7 +2,7 @@
 import css from "./SerchBar.module.css"
 import toast, { Toaster } from 'react-hot-toast';
 const notify = () => toast('enter a name.');
-//import ErrorMessage from "../ErrorMessage/ErrorMessage"
+// import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import { CiSearch } from "react-icons/ci";
 
 export default function SerchBar({ value, onSearch, onFilter }) {
@@ -26,7 +26,7 @@ export default function SerchBar({ value, onSearch, onFilter }) {
 
                     <button className={css.submitButton} type="submit"> <CiSearch /></button>
                     <Toaster />
-
+                    {/* <ErrorMessage /> */}
                     <input className={css.input}
                         placeholder="Please enter the name"
                         name="topic"

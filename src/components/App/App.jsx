@@ -1,7 +1,7 @@
 import axios from "axios";
 import css from './App.module.css'
 import { useState, useEffect } from "react";
-import { useMemo } from "react";
+// import { useMemo } from "react";
 //import toast, { Toaster } from 'react-hot-toast';
 //const notify = () => toast('enter a name.');
 // const notifyli = () => toast('Whoops, something went wrong! Please try reloading this page!');
@@ -72,8 +72,8 @@ export default function App() {
     setIsOpen(true);
     setSelected(data)
   };
-  const afterOpenModal = (first) => {
-    setSelected(first)
+  const afterOpenModal = (emag) => {
+    setSelected(emag)
   };
 
   function closeModal() {

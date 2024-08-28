@@ -23,6 +23,16 @@
     height: auto;
 }
 
+/* .active {
+    width: 100%;
+    height: auto;
+    margin: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #ffffff;
+    border-color: rgb(221, 211, 211);
+    border-radius: 10px;
+} */
+
 .cardCommant {
     width: 260px;
     height: 20px;
@@ -36,7 +46,7 @@
 }
 
 .comItem {
-    width: 120px;
+    width: 100px;
     height: 20px;
     padding: 0px;
     margin: 0px;
@@ -112,6 +122,15 @@
         margin: 2px;
     }
 
+    /* .active {
+        width: 100%;
+        height: auto;
+        margin: 20px;
+        padding: 20px;
+        border-bottom: 1px solid #ffffff;
+        border-radius: 10px;
+    } */
+
     .commant {
         padding: 3px;
         padding-left: 0px;
@@ -131,21 +150,27 @@
         width: 80px;
         height: 20px;
         padding: 0px;
+        padding-right: 2px;
         margin: 0px;
+        margin-right: 2px;
     }
 
     .comIte {
         width: 40px;
         height: 20px;
         padding: 0px;
+        padding-right: 2px;
         margin: 0px;
+        margin-right: 2px;
     }
 
     .comIt {
         width: 50px;
         height: 20px;
         padding: 0px;
+        padding-right: 2px;
         margin: 0px;
+        margin-right: 2px;
     }
 }
 

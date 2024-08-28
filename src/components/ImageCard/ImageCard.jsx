@@ -1,7 +1,7 @@
 import css from "./ImageCard.module.css"
 import { FiUser } from "react-icons/fi";
 import { FiThumbsUp } from "react-icons/fi";
-//import ImageModal from "../ImageModal/ImageModal"
+import { FiInstagram } from "react-icons/fi";
 
 export default function ImageCard({ obj: { user: { first_name, instagram_username }, likes, tags, urls: { small, regular } } }) {
     return (
@@ -10,18 +10,18 @@ export default function ImageCard({ obj: { user: { first_name, instagram_usernam
             {/* <ImageModal >
                 <><img className={css.imag} src={small} alt={tags} /></>
             </ImageModal> */}
-            <a className={css.imagLag} href={regular}></a>
+
             <img className={css.imag} src={small} alt={tags} />
 
             <div className={css.cardCommant}>
                 <div className={css.comItem}>
-                    <p className={css.commant}>Autor: {first_name}</p>
+                    <p className={css.commant}> <FiUser className={css.icon} /> {first_name}</p>
                 </div>
                 <div className={css.comIte}>
                     <p className={css.commant}><FiThumbsUp className={css.icon} /> {likes}</p>
                 </div>
                 <div className={css.comIt}>
-                    <p className={css.commant}><FiUser className={css.icon} /> {instagram_username}</p>
+                    <p className={css.commant}><FiInstagram className={css.icon} /> {instagram_username}</p>
                 </div>
 
             </div>

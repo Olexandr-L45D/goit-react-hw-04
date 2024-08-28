@@ -1,19 +1,42 @@
 
 import css from "./ErrorMessage.module.css"
-// import { ErrorMessage } from "formik"
+//import { ErrorMessage } from "formik"
 import toast, { Toaster } from 'react-hot-toast';
-const notify = () => toast('enter a name.');
-const notifyli = () => toast('Whoops, something went wrong! Please try reloading this page!');
-const notifyci = () => toast('Were sorry, but you ve reached the end of search results.');
+const notifEnter = () => toast('enter a name.');
+const notifFalse = () => toast('Whoops, something went wrong! Please try reloading this page!');
+const notifFinish = () => toast('Were sorry, but you ve reached the end of search results.');
 
 export default function ErrorMessage() {
+    const newRequest = () => {
+        notifEnter()
+    }
+    const errorMasseg = () => {
+        notifFalse()
+    }
+    const finishColections = () => {
+        notifFinish()
+    }
+
+    // if (form.elements.topic.value.trim() === "") {
+    //     notify()
+    //     return;
+    // }
 
     return (
-        <div className={css.item}>
-            <div>notify()</div>
-            <div>notifyli()</div>
-            <div>notifyci()</div>
+        <div className={css.notifCard}>
+            <ErrorMessage >
+                <div className={css.notifi} onSubmit={newRequest}>Enter</div>
+                <div className={css.notifi} onSubmit={errorMasseg}>Error</div>
+                <div className={css.notifi} onSubmit={finishColections}>Finish</div>
+            </ErrorMessage>
         </div>
     );
 };
+
+// { loading && <p style={{ fontSize: 20 }}>Loading data, please wait...</p> }
+// {
+//     error && (
+//         <p>Whoops, something went wrong! Please try reloading this page!</p>
+//     )
+// }
 
