@@ -1,11 +1,29 @@
 
 import css from "./SerchBar.module.css"
+import { useRef, useState, useEffect } from "react";
+import { FiArrowUpCircle } from "react-icons/fi";
 import toast, { Toaster } from 'react-hot-toast';
 const notify = () => toast('enter a name.');
 // import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import { CiSearch } from "react-icons/ci";
 
 export default function SerchBar({ value, onSearch, onFilter }) {
+    const formRef = useRef(1)
+    const [cliks, setClik] = useState('');
+    const dimsScrol = formRef.current.getBoundingClientRect();
+
+    const hendelScrol = () => {
+        window.scrollTo(
+            {
+                top: dimsScrol.y,
+                behavior: "smooth"
+            }
+        )
+        formRef.current += 1;
+        setClik(cliks + 1)
+        console.log(formRef);
+    }
+
     const handleSubmit = (evt) => {
         evt.preventDefault();
         const form = evt.target;
@@ -22,7 +40,7 @@ export default function SerchBar({ value, onSearch, onFilter }) {
     return (
         <header className={css.header}>
             <div className={css.items}>
-                <form className={css.form} onSubmit={handleSubmit}>
+                <form ref={formRef} className={css.form} onSubmit={handleSubmit}>
 
                     <button className={css.submitButton} type="submit"> <CiSearch /></button>
                     <Toaster />
@@ -35,59 +53,11 @@ export default function SerchBar({ value, onSearch, onFilter }) {
                         onChange={(e) => onFilter(e.target.value)}
                     />
                 </form>
+                <button onClick={hendelScrol} className={css.buttonRef} type="clik"> {cliks} <FiArrowUpCircle /></button>
             </div>
         </header >
     );
 };
-
-
-
-// додавав іконку на батон, працює але треба в середину інпута
-// {/* <button className={css.btn}><CiSearch /></button> */}
-
-// export default function SerchBar({ value, onSearch })
-// export default function SerchBar({ value, onFilter }) {
-//     return (
-//         <div className={css.item}>
-//             <h5 className={css.paragraf}>Search images and photos</h5>
-//             <input
-//                 type="text"
-//                 value={value}
-//                 onChange={(e) => onFilter(e.target.value)}
-//             />
-//         </div>
-//     );
-// }
-
-// function handleLoadMore() {   // функція при події клік на кнопці- додавання нових порцій сторінок(збільшую знач page на один, відключаю кнопку, після запиту на сервер відмаловуємо розмітку і включаю як прийшов позитивний результат)
-//     params.page += 1;
-//     disable(refs.loadMoreBtn, refs.spinnerText);
-
-//     setTimeout(async () => {
-//         try {
-//             const data = await getAsyncImage(searchText);
-
-//             renderGalleryMarkap(data.hits);
-//             const galleryItemScrol = document.querySelector('.gallery-item');
-//             const cardHeight = galleryItemScrol.getBoundingClientRect().height;
-//             window.scrollBy({                                                 // вставляю window.scrollBy після того як вставив в дом зображення
-//                 top: cardHeight * 2,
-//                 behavior: "smooth",
-//             });
-//             show(refs.spinnerText);
-//         } catch (error) {
-//             console.log(error);
-//             handlerErrorUzer(error);
-//         }
-//         finally {
-//             enable(refs.loadMoreBtn, refs.spinnerText);
-//             if (params.page === maxStoriges) {
-//                 notifyci()
-//                 //hiden(refs.loadMoreBtn); hiden(refs.spinnerText);
-//             }
-//         }
-//     }, 500); // затримка сеттаймаутом setTimeout на 0,5 секунди
-// };
 
 
 
