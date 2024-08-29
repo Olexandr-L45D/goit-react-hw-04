@@ -10,19 +10,15 @@ import { CiSearch } from "react-icons/ci";
 export default function SerchBar({ value, onSearch, onFilter }) {
     const formRef = useRef(1)
     const [cliks, setClik] = useState('');
-    const dimsScrol = formRef.current.getBoundingClientRect();
 
-    const hendelScrol = () => {
-        window.scrollTo(
-            {
-                top: dimsScrol.y,
-                behavior: "smooth"
-            }
-        )
-        formRef.current += 1;
-        setClik(cliks + 1)
-        console.log(formRef);
-    }
+    const handleScroll = () => {
+        const dimsScrol = formRef.current.getBoundingClientRect();
+
+        scrollTo({
+            top: dimsScrol.y,
+            behavior: "smooth",
+        });
+    };
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -35,27 +31,33 @@ export default function SerchBar({ value, onSearch, onFilter }) {
         }
         // У протилежному випадку викликаємо пропс  і передаємо йому значення поля
         onSearch(topic);
+        window.scrollTo(0, 0);
         form.reset();
     };
     return (
-        <header className={css.header}>
-            <div className={css.items}>
-                <form ref={formRef} className={css.form} onSubmit={handleSubmit}>
+        <div>
 
-                    <button className={css.submitButton} type="submit"> <CiSearch /></button>
-                    <Toaster />
-                    {/* <ErrorMessage /> */}
-                    <input className={css.input}
-                        placeholder="Please enter the name"
-                        name="topic"
-                        required
-                        autoFocus type="text" value={value}
-                        onChange={(e) => onFilter(e.target.value)}
-                    />
-                </form>
-                <button onClick={hendelScrol} className={css.buttonRef} type="clik"> {cliks} <FiArrowUpCircle /></button>
-            </div>
-        </header >
+            <header className={css.header}>
+                <div className={css.items}>
+                    <form ref={formRef} className={css.form} onSubmit={handleSubmit}>
+
+                        <button className={css.submitButton} type="submit"> <CiSearch /></button>
+                        <Toaster />
+                        {/* <ErrorMessage /> */}
+                        <input className={css.input}
+                            placeholder="Please enter the name"
+                            name="topic"
+                            required
+                            autoFocus type="text" value={value}
+                            onChange={(e) => onFilter(e.target.value)}
+                        />
+                    </form>
+
+                </div>
+            </header >
+            <button onClick={handleScroll} className={css.buttonRef} type="clik"> {cliks} <FiArrowUpCircle /></button>
+
+        </div>
     );
 };
 

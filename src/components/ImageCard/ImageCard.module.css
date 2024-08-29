@@ -147,7 +147,7 @@
     }
 
     .comItem {
-        width: 80px;
+        width: 60px;
         height: 20px;
         padding: 0px;
         padding-right: 2px;
@@ -211,7 +211,7 @@
     }
 
     .comItem {
-        width: 120px;
+        width: 100px;
         height: 20px;
     }
 
@@ -233,9 +233,6 @@
         flex-direction: row;
         text-align: center;
         align-items: center;
-        /* border: 0.5px solid rgb(245, 240, 240);
-        border-color: rgb(247, 243, 243);
-        border-radius: 5px; */
     }
 }
 

@@ -13,7 +13,7 @@ import { getAsyncImage } from "../../articles-api"
 // import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
 import ImageModal from "../ImageModal/ImageModal"
-// import RefScrol from "../RefScrol/RefScrol"
+
 
 export default function App() {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -102,7 +102,6 @@ export default function App() {
           <ImageModal isOpen={openModal} data={selectedPicture} afteOpan={afterOpenModal} onClose={closeModal} />
 
           {/* <ErrorMessage /> */}
-          {/* <RefScrol /> */}
         </>
 
       </div>

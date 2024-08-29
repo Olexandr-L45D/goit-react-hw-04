@@ -77,26 +77,25 @@
 }
 
 .buttonRef {
-    width: 20px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-color: blue;
     font-size: 30px;
     font-weight: 300;
     font-weight: bold;
     color: var(--color-dark);
-    color: rgb(243, 236, 236);
+    /* color: rgb(243, 236, 236); */
     border-style: none;
+    border-radius: 50%;
     position: absolute;
-    /* top: 50%; */
+    top: 90%;
     right: 0;
+    bottom: 0;
     transform: translateY(-20%);
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-}
+    padding: 4px;
+    margin: 0px;
+    margin-right: 10px;
 
-.submitButton {
-    composes: button;
-    right: 0;
 }
 
 .submitButton {

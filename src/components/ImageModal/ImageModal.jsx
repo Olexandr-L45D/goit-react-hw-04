@@ -17,20 +17,7 @@ export default function ImageModal({ isOpen, data, onClose, afteOpan }) {
     name,
   } = data;
 
-  // const customStyles = {
-  //   content: {
-  //     top: '50%',
-  //     left: '50%',
-  //     right: 'auto',
-  //     bottom: 'auto',
-  //     marginRight: '-50%',
-  //     transform: 'translate(-50%, -50%)',
-  //   },
-  // };
 
-  // onOpen();
-  // onAfteropen();
-  // onClose();
   return (
     <div>
       <Modal
@@ -45,7 +32,7 @@ export default function ImageModal({ isOpen, data, onClose, afteOpan }) {
 
           <img src={regular} alt={alt_description} className={css.image} />
 
-       
+
           <div className={css.details}>
             <p>
               <strong>Author:</strong> {name}
@@ -80,5 +67,16 @@ export default function ImageModal({ isOpen, data, onClose, afteOpan }) {
 //   style={customStyles}
 //   contentLabel="Example Modal"
 // >
+
+// const customStyles = {
+//   content: {
+//     top: '50%',
+//     left: '50%',
+//     right: 'auto',
+//     bottom: 'auto',
+//     marginRight: '-50%',
+//     transform: 'translate(-50%, -50%)',
+//   },
+// };
 
 

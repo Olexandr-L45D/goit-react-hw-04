@@ -13,7 +13,7 @@ async function getAsyncImage(query, page = 1) {
             orientation: "landscape",
             safesearch: true,
             page,
-            per_page: 16,
+            per_page: 12,
         },
     });
     return {
