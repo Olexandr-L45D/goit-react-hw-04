@@ -8,7 +8,6 @@ export default function ImageCard({ obj: { user: { first_name, instagram_usernam
     const handleClick = (velue) => {
         isOpen(velue);
         console.log(velue);
-
     };
     return (
 
@@ -17,7 +16,7 @@ export default function ImageCard({ obj: { user: { first_name, instagram_usernam
                 <><img onClick={handleClick} className={css.imag} src={regular} alt={tags} /></>
             </ImageModal>
 
-            <img onClick={handleClick} className={css.imag} src={small} alt={tags} />
+            <img className={css.imag} src={small} alt={tags} />
             {/* <img className={css.imag} src={small} alt={tags} /> */}
 
             <div className={css.cardCommant}>

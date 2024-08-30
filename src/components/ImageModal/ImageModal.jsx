@@ -3,7 +3,6 @@ import css from "./ImageModal.module.css"
 import Modal from 'react-modal';
 import { FiX } from "react-icons/fi";
 
-Modal.setAppElement("#root");
 export default function ImageModal({ isOpen, data, onClose, afteOpan }) {
   if (!data) {
     return null;
@@ -16,7 +15,7 @@ export default function ImageModal({ isOpen, data, onClose, afteOpan }) {
     instagram_username,
     name,
   } = data;
-
+  Modal.setAppElement("#modal");
 
   return (
     <div>
