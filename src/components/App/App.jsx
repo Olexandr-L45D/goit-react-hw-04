@@ -1,16 +1,11 @@
 import axios from "axios";
 import css from './App.module.css'
 import { useState, useEffect } from "react";
-// import { useMemo } from "react";
-//import toast, { Toaster } from 'react-hot-toast';
-//const notify = () => toast('enter a name.');
-// const notifyli = () => toast('Whoops, something went wrong! Please try reloading this page!');
-//const notifyci = () => toast('Were sorry, but you ve reached the end of search results.');
 import SerchBar from "../SerchBar/SerchBar"
 import ColorRing from "../Loader/Loader"
 import ImageGallery from "../ImageGallery/ImageGallery"
 import { getAsyncImage } from "../../articles-api"
-// import ErrorMessage from "../ErrorMessage/ErrorMessage"
+import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
 import ImageModal from "../ImageModal/ImageModal"
 
@@ -101,7 +96,7 @@ export default function App() {
 
           <ImageModal isOpen={openModal} data={selectedPicture} afteOpan={afterOpenModal} onClose={closeModal} />
 
-          {/* <ErrorMessage /> */}
+          <ErrorMessage />
         </>
 
       </div>

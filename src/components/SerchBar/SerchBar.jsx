@@ -2,12 +2,22 @@
 import css from "./SerchBar.module.css"
 import toast, { Toaster } from 'react-hot-toast';
 const notify = () => toast('enter a name.');
-// import ErrorMessage from "../ErrorMessage/ErrorMessage"
+import { useRef, useState } from "react";
+import { FiArrowUpCircle } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
 
 export default function SerchBar({ value, onSearch, onFilter }) {
 
+    const formRef = useRef(1)
+    const [cliks, setClik] = useState('');
 
+    const handleScroll = () => {
+        const dimsScrol = formRef.current.getBoundingClientRect();
+        scrollTo({
+            top: dimsScrol.y,
+            behavior: "smooth",
+        });
+    };
     const handleSubmit = (evt) => {
         evt.preventDefault();
         const form = evt.target;
@@ -19,7 +29,7 @@ export default function SerchBar({ value, onSearch, onFilter }) {
         }
         // У протилежному випадку викликаємо пропс  і передаємо йому значення поля
         onSearch(topic);
-
+        window.scrollTo(0, 1);
         form.reset();
     };
     return (
@@ -27,11 +37,11 @@ export default function SerchBar({ value, onSearch, onFilter }) {
 
             <header className={css.header}>
                 <div className={css.items}>
-                    <form className={css.form} onSubmit={handleSubmit}>
+                    <form ref={formRef} className={css.form} onSubmit={handleSubmit}>
 
                         <button className={css.submitButton} type="submit"> <CiSearch /></button>
                         <Toaster />
-                        {/* <ErrorMessage /> */}
+
                         <input className={css.input}
                             placeholder="Please enter the name"
                             name="topic"
@@ -40,7 +50,7 @@ export default function SerchBar({ value, onSearch, onFilter }) {
                             onChange={(e) => onFilter(e.target.value)}
                         />
                     </form>
-
+                    <button onClick={handleScroll} className={css.buttonRef} type="clik"> {cliks} <FiArrowUpCircle /></button>
                 </div>
             </header >
 
