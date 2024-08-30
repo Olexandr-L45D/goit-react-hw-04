@@ -4,10 +4,10 @@ import { FiThumbsUp } from "react-icons/fi";
 import { FiInstagram } from "react-icons/fi";
 import ImageModal from "../ImageModal/ImageModal"
 
-export default function ImageCard({ obj: { user: { first_name, instagram_username }, likes, tags, urls: { small, regular } } }) {
-    const handleClick = (event) => {
-        // isOpen()
-        console.log(event);
+export default function ImageCard({ obj: { user: { first_name, instagram_username }, likes, tags, urls: { small, regular } } }, isOpen) {
+    const handleClick = (velue) => {
+        isOpen(velue);
+        console.log(velue);
 
     };
     return (

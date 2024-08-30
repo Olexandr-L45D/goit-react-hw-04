@@ -88,7 +88,7 @@
     border-style: none;
     border-radius: 50%;
     position: absolute;
-    top: 90%;
+    top: 105%;
     right: 0;
     bottom: 0;
     transform: translateY(-20%);
@@ -149,6 +149,9 @@
         width: 800px;
         height: 45px;
         margin-left: 0px;
+        display: flex;
+        text-align: center;
+        align-items: center;
     }
 
     .submitButton {

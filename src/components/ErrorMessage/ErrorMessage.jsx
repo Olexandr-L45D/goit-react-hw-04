@@ -1,6 +1,5 @@
 
 import css from "./ErrorMessage.module.css"
-//import { ErrorMessage } from "formik"
 import toast, { Toaster } from 'react-hot-toast';
 const notifEnter = () => toast('enter a name.');
 const notifFalse = () => toast('Whoops, something went wrong! Please try reloading this page!');
@@ -27,7 +26,7 @@ export default function ErrorMessage() {
             <ErrorMessage >
                 <div className={css.notifi} onSubmit={newRequest}>Enter</div>
                 <div className={css.notifi} onSubmit={errorMasseg}>Error</div>
-                <div className={css.notifi} onSubmit={finishColections}>Finish</div>
+                <div className={css.notifi} onClick={finishColections}>Finish</div>
             </ErrorMessage>
         </div>
     );
