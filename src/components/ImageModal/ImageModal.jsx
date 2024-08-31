@@ -2,41 +2,32 @@ import React from 'react';
 import css from "./ImageModal.module.css"
 import Modal from 'react-modal';
 import { FiX } from "react-icons/fi";
-
-export default function ImageModal({ data, isOpen, onClose, afteOpan }) {
+Modal.setAppElement("#root");
+export default function ImageModal({ data, isOpen, onClose }) {
   if (!data) {
     return null;
   }
-  const {
-    regular,
+  console.log(data);
+
+  const { urls: { regular },
+
     alt_description,
     description,
     likes,
-    instagram_username,
-    name,
+    user: { instagram_username, name }
+
   } = data;
-  Modal.setAppElement("#modal");
 
   return (
     <div>
       <Modal
-        // isOpen={isOpen}
-        // afteOpan={afteOpan}
-        // onRequestClose={onRequestClose}
-        // className={css.modal}
-        // overlayClassName={css.overlay}
-
         isOpen={isOpen}
-        onRequestClose={onRequestClose}
+        onRequestClose={onClose}
         className={css.modal}
         overlayClassName={css.overlay}
-
       >
         <div className={css.content}>
-
           <img src={regular} alt={alt_description} className={css.image} />
-
-
           <div className={css.details}>
             <p>
               <strong>Author:</strong> {name}
@@ -56,9 +47,9 @@ export default function ImageModal({ data, isOpen, onClose, afteOpan }) {
             </p>
           </div>
         </div>
-        <button onClose={onClose}>
+        {/* <button onClose={onClose}>
           <FiX />
-        </button>
+        </button> */}
       </Modal>
     </div>
   );

@@ -2,22 +2,18 @@ import css from "./ImageCard.module.css"
 import { FiUser } from "react-icons/fi";
 import { FiThumbsUp } from "react-icons/fi";
 import { FiInstagram } from "react-icons/fi";
-import ImageModal from "../ImageModal/ImageModal"
 
-export default function ImageCard({ obj: { user: { first_name, instagram_username }, likes, tags, urls: { small, regular } } }, isOpen) {
-    const handleClick = (velue) => {
-        isOpen(velue);
-        console.log(velue);
-    };
+export default function ImageCard({ obj, onClick }) {
+
+    const {
+        user: { first_name, instagram_username }, likes, tags, urls: { small }
+    } = obj
+
     return (
 
         <div className={css.card}  >
-            <ImageModal >
-                <><img onClick={handleClick} className={css.imag} src={regular} alt={tags} /></>
-            </ImageModal>
 
-            <img className={css.imag} src={small} alt={tags} />
-            {/* <img className={css.imag} src={small} alt={tags} /> */}
+            <img className={css.imag} src={small} alt={tags} onClick={onClick} />
 
             <div className={css.cardCommant}>
                 <div className={css.comItem}>

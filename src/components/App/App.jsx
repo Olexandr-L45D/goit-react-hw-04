@@ -11,7 +11,7 @@ import ImageModal from "../ImageModal/ImageModal"
 
 
 export default function App() {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedPicture, setSelected] = useState(null);
   const [articles, setArticles] = useState([]);
   const [filter, setFilter] = useState('');
@@ -68,9 +68,6 @@ export default function App() {
     setIsOpen(true);
     setSelected(data)
   };
-  const afterOpenModal = (data) => {
-    setSelected(data)
-  };
 
   function closeModal() {
     setIsOpen(false);
@@ -84,7 +81,7 @@ export default function App() {
       </div>
       <div>
         <>
-          {articles.length > 0 && <ImageGallery items={articles} setPage={page + 1} />}
+          {articles.length > 0 && <ImageGallery items={articles} onClik={openModal} setPage={page + 1} />}
         </>
         <>
           {page >= totalPages && <b>END OF COLLECTION!!!!</b>}
@@ -93,7 +90,7 @@ export default function App() {
           {articles.length > 0 && !loading && (
             <LoadMoreBtn onAdd={handleLoadMore} />
           )}
-          <ImageModal isOpen={openModal} data={selectedPicture} afteOpan={afterOpenModal} onClose={closeModal} />
+          <ImageModal isOpen={isOpen} data={selectedPicture} onClose={closeModal} />
           <ErrorMessage />
         </>
       </div>
