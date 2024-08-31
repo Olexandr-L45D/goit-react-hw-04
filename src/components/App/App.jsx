@@ -68,8 +68,8 @@ export default function App() {
     setIsOpen(true);
     setSelected(data)
   };
-  const afterOpenModal = (emag) => {
-    setSelected(emag)
+  const afterOpenModal = (data) => {
+    setSelected(data)
   };
 
   function closeModal() {
@@ -93,12 +93,9 @@ export default function App() {
           {articles.length > 0 && !loading && (
             <LoadMoreBtn onAdd={handleLoadMore} />
           )}
-
           <ImageModal isOpen={openModal} data={selectedPicture} afteOpan={afterOpenModal} onClose={closeModal} />
-
           <ErrorMessage />
         </>
-
       </div>
     </>
   )

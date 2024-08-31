@@ -3,8 +3,8 @@ import css from "./SerchBar.module.css"
 import toast, { Toaster } from 'react-hot-toast';
 const notify = () => toast('enter a name.');
 import { useRef, useState } from "react";
-import { FiArrowUpCircle } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
+import { FiNavigation2 } from "react-icons/fi";
 
 export default function SerchBar({ value, onSearch, onFilter }) {
 
@@ -50,7 +50,7 @@ export default function SerchBar({ value, onSearch, onFilter }) {
                             onChange={(e) => onFilter(e.target.value)}
                         />
                     </form>
-                    <button onClick={handleScroll} className={css.buttonRef} type="clik"> {cliks} <FiArrowUpCircle /></button>
+                    <button onClick={handleScroll} className={css.buttonRef} type="clik"> {cliks} <FiNavigation2 /></button>
                 </div>
             </header >
 

@@ -3,7 +3,7 @@ import css from "./ImageModal.module.css"
 import Modal from 'react-modal';
 import { FiX } from "react-icons/fi";
 
-export default function ImageModal({ isOpen, data, onClose, afteOpan }) {
+export default function ImageModal({ data, isOpen, onClose, afteOpan }) {
   if (!data) {
     return null;
   }
@@ -20,8 +20,13 @@ export default function ImageModal({ isOpen, data, onClose, afteOpan }) {
   return (
     <div>
       <Modal
+        // isOpen={isOpen}
+        // afteOpan={afteOpan}
+        // onRequestClose={onRequestClose}
+        // className={css.modal}
+        // overlayClassName={css.overlay}
+
         isOpen={isOpen}
-        afteOpan={afterOpenModal}
         onRequestClose={onRequestClose}
         className={css.modal}
         overlayClassName={css.overlay}
@@ -67,15 +72,5 @@ export default function ImageModal({ isOpen, data, onClose, afteOpan }) {
 //   contentLabel="Example Modal"
 // >
 
-// const customStyles = {
-//   content: {
-//     top: '50%',
-//     left: '50%',
-//     right: 'auto',
-//     bottom: 'auto',
-//     marginRight: '-50%',
-//     transform: 'translate(-50%, -50%)',
-//   },
-// };
 
 

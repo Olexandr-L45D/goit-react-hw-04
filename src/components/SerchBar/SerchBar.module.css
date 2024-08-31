@@ -87,10 +87,9 @@
     /* color: rgb(243, 236, 236); */
     border-style: none;
     border-radius: 50%;
-    position: absolute;
-    top: 150%;
-    right: 0;
-    bottom: 0;
+    position: fixed;
+    right: 5px;
+    bottom: 10px;
     transform: translateY(-20%);
     padding: 4px;
     margin: 0px;
