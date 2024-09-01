@@ -1,12 +1,12 @@
 
-import css from "./SerchBar.module.css"
+import css from "./SearchBar.module.css"
 import toast, { Toaster } from 'react-hot-toast';
 const notify = () => toast('enter a name.');
 import { useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FiNavigation2 } from "react-icons/fi";
 
-export default function SerchBar({ value, onSearch, onFilter }) {
+export default function SearchBar({ value, onSearch, onFilter }) {
 
     const formRef = useRef(1)
     const [cliks, setClik] = useState('');

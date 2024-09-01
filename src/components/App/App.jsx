@@ -1,14 +1,13 @@
 import axios from "axios";
 import css from './App.module.css'
 import { useState, useEffect } from "react";
-import SerchBar from "../SerchBar/SerchBar"
+import SearchBar from "../SearchBar/SearchBar"
 import ColorRing from "../Loader/Loader"
 import ImageGallery from "../ImageGallery/ImageGallery"
 import { getAsyncImage } from "../../articles-api"
 import ErrorMessage from "../ErrorMessage/ErrorMessage"
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn"
 import ImageModal from "../ImageModal/ImageModal"
-
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,16 +22,6 @@ export default function App() {
     const savClicks = window.localStorage.getItem("my-clicks");
     return savClicks !== null && JSON.parse(savClicks) && "";
   });
-  useEffect(() => {
-    const isLocalStorData = Boolean(localStorage.getItem("my-clicks"));
-    if (isLocalStorData) {
-      const data = localStorage.getItem("my-clicks");
-      setTopic(JSON.parse(data));
-    }
-  }, []);
-  useEffect(() => {
-    window.localStorage.setItem("my-clicks", JSON.stringify(topic));
-  }, [topic]);
   // перший фетч http на ефекті щоб спрацювало один раз при монтуванні
   useEffect(() => {
     if (topic === "") {
@@ -77,24 +66,54 @@ export default function App() {
   return (
     <>
       <div className={css.headers}>
-        <SerchBar onSearch={handleSearch} onFilter={setFilter} />
+        <SearchBar onSearch={handleSearch} onFilter={setFilter} />
       </div>
       <div>
         <>
-          {articles.length > 0 && <ImageGallery items={articles} onClik={openModal} setPage={page + 1} />}
+          {articles.length > 0 && <ImageGallery items={articles} onClick={openModal} />}
         </>
         <>
-          {page >= totalPages && <b>END OF COLLECTION!!!!</b>}
-          {error && <b>ERROR!!!</b>}
+          {page >= totalPages && <ErrorMessage />}
+          {error && <ErrorMessage />}
           {loading && <ColorRing />}
           {articles.length > 0 && !loading && (
             <LoadMoreBtn onAdd={handleLoadMore} />
           )}
           <ImageModal isOpen={isOpen} data={selectedPicture} onClose={closeModal} />
-          <ErrorMessage />
         </>
       </div>
     </>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// в данному ДЗ зберігати в Локальне Сховище не потрібно
+// const [topic, setTopic] = useState(() => {
+//   const savClicks = window.localStorage.getItem("my-clicks");
+//   return savClicks !== null && JSON.parse(savClicks) && "";
+// });
+// useEffect(() => {
+//   const isLocalStorData = Boolean(localStorage.getItem("my-clicks"));
+//   if (isLocalStorData) {
+//     const data = localStorage.getItem("my-clicks");
+//     setTopic(JSON.parse(data));
+//   }
+// }, []);
+// useEffect(() => {
+//   window.localStorage.setItem("my-clicks", JSON.stringify(topic));
+// }, [topic]);
+
 

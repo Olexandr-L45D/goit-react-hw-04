@@ -10,8 +10,7 @@ export default function ImageModal({ data, isOpen, onClose }) {
   if (!data) {
     return null;
   }
-  console.log(data);
-
+  // console.log(data);
   const { urls: { regular },
     alt_description,
     description,
@@ -31,36 +30,28 @@ export default function ImageModal({ data, isOpen, onClose }) {
           <img src={regular} alt={alt_description} className={css.image} />
           <div className={css.cardCommant}>
             <div className={css.comItem}>
-
               <p className={css.commant}>
                 <strong>Author: <FiUser className={css.icon} /> </strong> {name}
               </p>
-
             </div>
             {instagram_username && (
               <div className={css.comItem}>
-
                 <p className={css.commant}>
                   <strong>Instagram: <FiInstagram className={css.icon} /> </strong> @{instagram_username}
                 </p>
-
               </div>
             )}
             {description && (
               <div className={css.comDescript}>
-
                 <p className={css.commant}>
                   <strong>Description:</strong> {description}
                 </p>
-
               </div>
             )}
             <div className={css.comIte}>
-
               <p className={css.commant}>
                 <strong>Likes: <FiThumbsUp className={css.icon} />  </strong> {likes}
               </p>
-
             </div>
           </div>
         </div>
