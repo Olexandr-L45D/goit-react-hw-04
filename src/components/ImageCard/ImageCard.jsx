@@ -31,7 +31,3 @@ export default function ImageCard({ obj, onClick }) {
 
     );
 }
-
-// { <ImageModal onClick={() => setIsOpen(modalIsOpen + 1)} /> }
-// { <ImageModal overlayRef={node => (this.overlayRef = node)}
-//contentRef = { node => (this.contentRef = node)} onClick={() => setIsOpen(modalIsOpen + 1)} /> } 

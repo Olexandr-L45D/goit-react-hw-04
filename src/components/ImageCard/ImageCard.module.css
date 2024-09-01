@@ -23,16 +23,6 @@
     height: auto;
 }
 
-/* .active {
-    width: 100%;
-    height: auto;
-    margin: 20px;
-    padding: 20px;
-    border-bottom: 1px solid #ffffff;
-    border-color: rgb(221, 211, 211);
-    border-radius: 10px;
-} */
-
 .cardCommant {
     width: 260px;
     height: 20px;
@@ -122,15 +112,6 @@
         margin: 2px;
     }
 
-    /* .active {
-        width: 100%;
-        height: auto;
-        margin: 20px;
-        padding: 20px;
-        border-bottom: 1px solid #ffffff;
-        border-radius: 10px;
-    } */
-
     .commant {
         padding: 3px;
         padding-left: 0px;
@@ -200,7 +181,7 @@
         padding-left: 0px;
         margin: 1px;
         margin-left: 0px;
-        color: rgb(243, 239, 239);
+        color: rgb(245, 239, 239);
         font-size: 0.9em;
         font-weight: 300;
         line-height: 1;
