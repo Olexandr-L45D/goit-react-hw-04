@@ -4,7 +4,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 20px;
+    padding: 10px;
     border-radius: 6px;
     max-width: 90%;
     max-height: 90%;
@@ -47,8 +47,8 @@
 .active {
     width: 100%;
     height: auto;
-    margin: 20px;
-    padding: 20px;
+    margin: 10px;
+    padding: 10px;
     border-bottom: 1px solid #ffffff;
     border-radius: 10px;
 }
@@ -65,7 +65,7 @@
 
 .cardCommant {
     width: 900px;
-    height: 60px;
+    height: 50px;
     padding: 0px;
     margin: 0px;
     margin-top: 4px;
@@ -77,7 +77,7 @@
 
 .comDescript {
     width: 500px;
-    height: 55px;
+    height: 45px;
     padding: 2px;
     margin: 2px;
     display: flex;
