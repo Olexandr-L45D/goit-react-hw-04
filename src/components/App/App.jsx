@@ -13,7 +13,7 @@ export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPicture, setSelected] = useState(null);
   const [articles, setArticles] = useState([]);
-  const [filter, setFilter] = useState('');
+  // const [filter, setFilter] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [totalPages, setTotalPages] = useState(1000);
